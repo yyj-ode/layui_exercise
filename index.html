@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <link rel="stylesheet" href="layui/css/myglobal.css">
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <!--<a class="logo" href="/">-->
+            <!--<img src="images/logo.png" alt="layui" style="width: 82px;height: 31px;position:absolute;top:16px;left:40px">-->
+        <!--</a>-->
+        <a href="#" class="text-logo">演库后台</a>
+        <ul class="layui-nav">
+            <li class="layui-nav-item"><a href="">退出</a></li>
+        </ul>
+    </div>
+    <div class="layui-side layui-bg-black">
+
+        <div class="layui-side-scroll">
+            <div class="user-photo">
+                <a class="img" title="我的头像" >
+                    <img src="images/user.jpg" class="userimg1"></a>
+                <p>您好！admin, 欢迎登录</p>
+            </div>
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree">
+                <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+                <li class="layui-nav-item layui-this">
+                    <a href="javascript:;" class="site-demo-active" data-type="tabAdd" id="001"><span >后台首页</span></a>
+                </li>
+
+                <li class="layui-nav-item">
+                    <a href="javascript:;">用户管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" class="site-demo-active" data-type="tabAdd" id="002">&nbsp;&nbsp;本站用户</a></dd>
+                        <dd><a href="javascript:;" class="site-demo-active" data-type="tabAdd" id="003">&nbsp;&nbsp;身份认证</a></dd>
+                        <dd><a href="javascript:;" class="site-demo-active" data-type="tabAdd" id="004">&nbsp;&nbsp;演绎认证</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">财务管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" class="site-demo-active" data-type="tabAdd" id="005">&nbsp;&nbsp;充值记录</a></dd>
+                        <dd><a href="javascript:;" class="site-demo-active" data-type="tabAdd" id="006">&nbsp;&nbsp;提现记录</a></dd>
+                        <dd><a href="javascript:;" class="site-demo-active" data-type="tabAdd" id="007">&nbsp;&nbsp;消费记录</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">直播管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" class="site-demo-active" data-type="tabAdd" id="008">&nbsp;&nbsp;直播列表</a></dd>
+                        <dd><a href="javascript:;" class="site-demo-active" data-type="tabAdd" id="009">&nbsp;&nbsp;直播监控</a></dd>
+                        <dd><a href="javascript:;" class="site-demo-active" data-type="tabAdd" id="010">&nbsp;&nbsp;系统消息</a></dd>
+                        <dd><a href="javascript:;" class="site-demo-active" data-type="tabAdd" id="011">&nbsp;&nbsp;用户举报</a></dd>
+                        <dd><a href="javascript:;" class="site-demo-active" data-type="tabAdd" id="012">&nbsp;&nbsp;直播记录</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">内容管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="" class="site-demo-active" data-type="tabAdd" id="013">&nbsp;&nbsp;用户反馈</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">礼物管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" class="site-demo-active" data-type="tabAdd" id="014">&nbsp;&nbsp;礼物列表</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">通告管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" class="site-demo-active" data-type="tabAdd" id="015">&nbsp;&nbsp;通告审核</a></dd>
+                        <dd><a href="javascript:;" class="site-demo-active" data-type="tabAdd" id="016">&nbsp;&nbsp;通告统计</a></dd>
+                        <dd><a href="javascript:;" class="site-demo-active" data-type="tabAdd" id="017">&nbsp;&nbsp;发布公告</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">等级管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" class="site-demo-active" data-type="tabAdd" id="018">&nbsp;&nbsp;积分等级</a></dd>
+                        <dd><a href="javascript:;" class="site-demo-active" data-type="tabAdd" id="019">&nbsp;&nbsp;礼物等级</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">登录奖励</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" class="site-demo-active" data-type="tabAdd" id="020">&nbsp;&nbsp;奖励管理</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">轮播图管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" class="site-demo-active" data-type="tabAdd" id="021">&nbsp;&nbsp;通告区轮播列表</a></dd>
+                        <dd><a href="javascript:;" class="site-demo-active" data-type="tabAdd" id="022">&nbsp;&nbsp;通告区轮播添加</a></dd>
+                        <dd><a href="javascript:;" class="site-demo-active" data-type="tabAdd" id="023">&nbsp;&nbsp;活动区轮播列表</a></dd>
+                        <dd><a href="javascript:;" class="site-demo-active" data-type="tabAdd" id="024">&nbsp;&nbsp;活动区轮播添加</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div class="layui-tab layui-tab-card" lay-allowclose="true" lay-filter="demo">
+            <ul class="layui-tab-title">
+                <li class="layui-this" lay-id="111" >演库后台登录</li>
+                <li lay-id="222">百度</li>
+                <li lay-id="333">XAMPP</li>
+                <li lay-id="444">淘宝</li>
+                <li lay-id="555">魔力百科</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <iframe src="http://192.168.1.125/yanku/" frameborder="0" id="if1"></iframe></div>
+                <div class="layui-tab-item">
+                    <iframe src="http://www.baidu.com" frameborder="0"></iframe>
+                </div>
+                <div class="layui-tab-item">
+                    <iframe src="http://192.168.1.125/" frameborder="0"></iframe>
+                </div>
+                <div class="layui-tab-item">
+                    <iframe src="http://www.taobao.com/" frameborder="0"></iframe>
+                </div>
+                <div class="layui-tab-item">
+                    <iframe src="http://www.molibaike.com/" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        <div class="layui-mian">
+            <p class="p-admin">
+                <span>2017 &copy;</span>
+                Write by yyj-ode, 演库 版权所有
+            </p>
+        </div>
+        <input type="hidden" id="yanku-tab-title">
+        <input type="hidden" id="yanku-tab-content">
+        <input type="hidden" id="yanku-tab-id">
+    </div>
+</div>
+
+<script src="layui/layui.js"></script>
+<script>
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+
+        var $ = layui.jquery
+                ,element = layui.element();
+
+        //触发事件
+        var active = {
+            tabAdd: function(){
+                //新增一个Tab项
+                var yanku_tab_id = $('#yanku-tab-id').val();
+                var yanku_tab_title = $('#yanku-tab-title').val();
+                var yanku_tab_content = $('#yanku-tab-content').val();
+                element.tabAdd('demo', {
+                    title: yanku_tab_title
+                    ,content:yanku_tab_content
+                    ,id: yanku_tab_id
+                })
+            }
+            ,tabDelete: function(othis){
+                //删除指定Tab项
+                element.tabDelete('demo', '444'); //删除：“商品管理”
+
+            }
+            ,tabChange: function(){
+                //切换到指定Tab项
+                element.tabChange('demo', '222'); //切换到：用户管理
+            }
+        };
+
+        //这个xxx动态传值，进来啥就往啥那儿跳
+        $('.site-demo-active').on('click', function(){
+            $('#yanku-tab-id').val(this.id);
+            $('#yanku-tab-title').val(this.text);
+            $('#yanku-tab-content').val(this.text);
+            var tabChange_id = this.id;
+            var othis = $(this), type = othis.data('type');
+            //判断标签是否已存在，存在则不生成新的，直接跳转
+            var if_tab_exists = $("li[lay-id = '"+tabChange_id+"']").attr('lay-id');
+            if(!if_tab_exists){
+                //添加新的选项卡
+                active[type] ? active[type].call(this, othis) : '';
+            }
+            //跳转到新的选项卡
+            element.tabChange('demo',tabChange_id);
+        });
+
+
+
+        //…
+    });
+</script>
+</body>
+</html>
