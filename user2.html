@@ -78,7 +78,7 @@
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
     layui.use(['laydate','form','laypage','layer','laytpl','element'], function(){
-
+        var demo_user_page = demo.innerHTML;
 
         var laydate = layui.laydate
             ,laypage = layui.laypage
@@ -159,7 +159,8 @@
                         datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
                         //成功返回之后调用的函数
                         success:function(data){
-                            var getTpl = demo.innerHTML;
+                            layer.msg('第 '+ obj.curr +' 页');
+                            var getTpl = demo_user_page;
                             var data_object = $.parseJSON( data );
                             laytpl(getTpl).render(data_object, function(html){
                                 view.innerHTML = html;
