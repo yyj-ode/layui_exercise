@@ -86,3 +86,15 @@ iframe {
     min-height:722px;
 }
 
+.search-key {
+    display: block;
+    width: 200px;
+    padding-left: 10px;
+}
+
+img {
+    display: inline-block;
+    border: none;
+    width: 19px;
+}
+

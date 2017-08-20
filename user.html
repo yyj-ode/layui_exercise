@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="dist/styles/normalize.css"/>
+    <link rel="stylesheet" href="dist/styles/bootstrap.min.css"/>
+    <link rel="stylesheet" href="dist/styles/head.min.css"/>
+    <link rel="stylesheet" href="dist/styles/user.min.css"/>
+</head>
+<body>
+    <div class="user_main">
+        <div class="user_top">
+            <div class="user_kuai">
+                <p class="user_pa">僵尸粉开关：</p>
+                <select class="form-control">
+                    <option>全部</option>
+                    <option>开启</option>
+                    <option>关闭</option>
+                </select>
+            </div>
+            <div class="user_kuai">
+                <p class="user_pa">僵尸粉：</p>
+                <select class="form-control">
+                    <option>全部</option>
+                    <option>是</option>
+                    <option>否</option>
+                </select>
+            </div>
+            <div class="user_kuai">
+                <p class="user_pa">禁用：</p>
+                <select class="form-control">
+                    <option>全部</option>
+                    <option>是</option>
+                    <option>否</option>
+                </select>
+            </div>
+            <div class="user_kuai">
+                <p class="user_pa">热门：</p>
+                <select class="form-control">
+                    <option>全部</option>
+                    <option>是</option>
+                    <option>否</option>
+                </select>
+            </div>
+            <div class="user_kuai userlist">
+                <p class="user_pa">超管：</p>
+                <select class="form-control">
+                    <option>全部</option>
+                    <option>是</option>
+                    <option>否</option>
+                </select>
+            </div>
+            <div class="user_kuai1">
+                <p class="user_pb">注册时间：</p>
+                <input class="form-control"  type="text" id="J-xl">
+                <p class="user_pc">—</p>
+                <input class="form-control"  type="text" id="J-x2">
+            </div>
+
+            <div class="user_kuai1">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label class="sr-only"></label>
+                        <p class="form-control-static">关键字：</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword2" class="sr-only">输入id、用户名称或者名称</label>
+                        <input type="text" class="form-control" id="inputPassword2" placeholder="输入id、用户名称或者名称">
+                    </div>
+                    <button type="submit" class="btn btn-default">搜索</button>
+                </form>
+            </div>
+        </div>
+        <div class="JshiBtn">
+            <button type="button" class="btn btn-info">批量设置为僵尸粉</button>
+            <button type="button" class="btn btn-info">批量取消僵尸粉</button>
+            <button type="button" class="btn btn-info">一键开启僵尸粉</button>
+            <button type="button" class="btn btn-info">一键关闭僵尸粉</button>
+            <p>请至少选择一项</p>
+        </div>
+        <form>
+            <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th width="15">
+                        <label>
+                            <input type="checkbox" class="js-check-all" data-direction="x" data-checklist="js-check-x">
+                        </label>
+                    </th>
+                    <th align="center">ID</th>
+                    <th>用户名</th>
+                    <th>昵称</th>
+                    <th>头像</th>
+                    <th>余额</th>
+                    <th>累计消费</th>
+                    <th>映票</th>
+                    <th>累计映票</th>
+                    <th>注册时间</th>
+                    <th>最后登录时间</th>
+                    <th>最后登录IP</th>
+                    <th>状态</th>
+                    <th align="center">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]" value="9347" title="ID:9347">
+                    </td>
+                    <td align="center">9347</td>
+                    <td>wx_1494313808365</td>
+                    <td>老T</td>
+                    <td>
+                        <img width="25" height="25" src="http://wx.qlogo.cn/mmopen/eH08qelRZywlmAX0biazSia5BeBvLPmXAGroIlye3mRpaNauHRUibAqiaLzdj7aO03BaI2V2Fh4WpA58Fju2IA7kTibLibBY7eicpo2/0">
+                    </td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>2017-05-09 15:10:08</td>
+                    <td>2017-05-09 15:10:08</td>
+                    <td>117.85.193.171</td>
+                    <td>正常</td>
+                    <td align="center" style="text-align: left">
+                        <a href="#" data-msg="您确定要拉黑此用户吗？">拉黑</a> |
+                        <a href="#" data-msg="您确定要设置超管吗？">设置超管</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要取消热门吗？">取消热门</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要推荐此用户吗？">推荐</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要开启僵尸粉吗？">开启僵尸粉</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要设置为僵尸粉吗？">设置为僵尸粉</a> |
+                        <a href="#">编辑</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要删除此用户吗？">删除</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]" value="9347" title="ID:9347">
+                    </td>
+                    <td align="center">9347</td>
+                    <td>wx_1494313808365</td>
+                    <td>老T</td>
+                    <td>
+                        <img width="25" height="25" src="http://wx.qlogo.cn/mmopen/eH08qelRZywlmAX0biazSia5BeBvLPmXAGroIlye3mRpaNauHRUibAqiaLzdj7aO03BaI2V2Fh4WpA58Fju2IA7kTibLibBY7eicpo2/0">
+                    </td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>2017-05-09 15:10:08</td>
+                    <td>2017-05-09 15:10:08</td>
+                    <td>117.85.193.171</td>
+                    <td>正常</td>
+                    <td align="center" style="text-align: left">
+                        <a href="#" data-msg="您确定要拉黑此用户吗？">拉黑</a> |
+                        <a href="#" data-msg="您确定要设置超管吗？">设置超管</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要取消热门吗？">取消热门</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要推荐此用户吗？">推荐</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要开启僵尸粉吗？">开启僵尸粉</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要设置为僵尸粉吗？">设置为僵尸粉</a> |
+                        <a href="#">编辑</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要删除此用户吗？">删除</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]" value="9347" title="ID:9347">
+                    </td>
+                    <td align="center">9347</td>
+                    <td>wx_1494313808365</td>
+                    <td>老T</td>
+                    <td>
+                        <img width="25" height="25" src="http://wx.qlogo.cn/mmopen/eH08qelRZywlmAX0biazSia5BeBvLPmXAGroIlye3mRpaNauHRUibAqiaLzdj7aO03BaI2V2Fh4WpA58Fju2IA7kTibLibBY7eicpo2/0">
+                    </td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>2017-05-09 15:10:08</td>
+                    <td>2017-05-09 15:10:08</td>
+                    <td>117.85.193.171</td>
+                    <td>正常</td>
+                    <td align="center" style="text-align: left">
+                        <a href="#" data-msg="您确定要拉黑此用户吗？">拉黑</a> |
+                        <a href="#" data-msg="您确定要设置超管吗？">设置超管</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要取消热门吗？">取消热门</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要推荐此用户吗？">推荐</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要开启僵尸粉吗？">开启僵尸粉</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要设置为僵尸粉吗？">设置为僵尸粉</a> |
+                        <a href="#">编辑</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要删除此用户吗？">删除</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]" value="9347" title="ID:9347">
+                    </td>
+                    <td align="center">9347</td>
+                    <td>wx_1494313808365</td>
+                    <td>老T</td>
+                    <td>
+                        <img width="25" height="25" src="http://wx.qlogo.cn/mmopen/eH08qelRZywlmAX0biazSia5BeBvLPmXAGroIlye3mRpaNauHRUibAqiaLzdj7aO03BaI2V2Fh4WpA58Fju2IA7kTibLibBY7eicpo2/0">
+                    </td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>2017-05-09 15:10:08</td>
+                    <td>2017-05-09 15:10:08</td>
+                    <td>117.85.193.171</td>
+                    <td>正常</td>
+                    <td align="center" style="text-align: left">
+                        <a href="#" data-msg="您确定要拉黑此用户吗？">拉黑</a> |
+                        <a href="#" data-msg="您确定要设置超管吗？">设置超管</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要取消热门吗？">取消热门</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要推荐此用户吗？">推荐</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要开启僵尸粉吗？">开启僵尸粉</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要设置为僵尸粉吗？">设置为僵尸粉</a> |
+                        <a href="#">编辑</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要删除此用户吗？">删除</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]" value="9347" title="ID:9347">
+                    </td>
+                    <td align="center">9347</td>
+                    <td>wx_1494313808365</td>
+                    <td>老T</td>
+                    <td>
+                        <img width="25" height="25" src="http://wx.qlogo.cn/mmopen/eH08qelRZywlmAX0biazSia5BeBvLPmXAGroIlye3mRpaNauHRUibAqiaLzdj7aO03BaI2V2Fh4WpA58Fju2IA7kTibLibBY7eicpo2/0">
+                    </td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>2017-05-09 15:10:08</td>
+                    <td>2017-05-09 15:10:08</td>
+                    <td>117.85.193.171</td>
+                    <td>正常</td>
+                    <td align="center" style="text-align: left">
+                        <a href="#" data-msg="您确定要拉黑此用户吗？">拉黑</a> |
+                        <a href="#" data-msg="您确定要设置超管吗？">设置超管</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要取消热门吗？">取消热门</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要推荐此用户吗？">推荐</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要开启僵尸粉吗？">开启僵尸粉</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要设置为僵尸粉吗？">设置为僵尸粉</a> |
+                        <a href="#">编辑</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要删除此用户吗？">删除</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]" value="9347" title="ID:9347">
+                    </td>
+                    <td align="center">9347</td>
+                    <td>wx_1494313808365</td>
+                    <td>老T</td>
+                    <td>
+                        <img width="25" height="25" src="http://wx.qlogo.cn/mmopen/eH08qelRZywlmAX0biazSia5BeBvLPmXAGroIlye3mRpaNauHRUibAqiaLzdj7aO03BaI2V2Fh4WpA58Fju2IA7kTibLibBY7eicpo2/0">
+                    </td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>2017-05-09 15:10:08</td>
+                    <td>2017-05-09 15:10:08</td>
+                    <td>117.85.193.171</td>
+                    <td>正常</td>
+                    <td align="center" style="text-align: left">
+                        <a href="#" data-msg="您确定要拉黑此用户吗？">拉黑</a> |
+                        <a href="#" data-msg="您确定要设置超管吗？">设置超管</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要取消热门吗？">取消热门</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要推荐此用户吗？">推荐</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要开启僵尸粉吗？">开启僵尸粉</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要设置为僵尸粉吗？">设置为僵尸粉</a> |
+                        <a href="#">编辑</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要删除此用户吗？">删除</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]" value="9347" title="ID:9347">
+                    </td>
+                    <td align="center">9347</td>
+                    <td>wx_1494313808365</td>
+                    <td>老T</td>
+                    <td>
+                        <img width="25" height="25" src="http://wx.qlogo.cn/mmopen/eH08qelRZywlmAX0biazSia5BeBvLPmXAGroIlye3mRpaNauHRUibAqiaLzdj7aO03BaI2V2Fh4WpA58Fju2IA7kTibLibBY7eicpo2/0">
+                    </td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>2017-05-09 15:10:08</td>
+                    <td>2017-05-09 15:10:08</td>
+                    <td>117.85.193.171</td>
+                    <td>正常</td>
+                    <td align="center" style="text-align: left">
+                        <a href="#" data-msg="您确定要拉黑此用户吗？">拉黑</a> |
+                        <a href="#" data-msg="您确定要设置超管吗？">设置超管</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要取消热门吗？">取消热门</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要推荐此用户吗？">推荐</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要开启僵尸粉吗？">开启僵尸粉</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要设置为僵尸粉吗？">设置为僵尸粉</a> |
+                        <a href="#">编辑</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要删除此用户吗？">删除</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]" value="9347" title="ID:9347">
+                    </td>
+                    <td align="center">9347</td>
+                    <td>wx_1494313808365</td>
+                    <td>老T</td>
+                    <td>
+                        <img width="25" height="25" src="http://wx.qlogo.cn/mmopen/eH08qelRZywlmAX0biazSia5BeBvLPmXAGroIlye3mRpaNauHRUibAqiaLzdj7aO03BaI2V2Fh4WpA58Fju2IA7kTibLibBY7eicpo2/0">
+                    </td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>2017-05-09 15:10:08</td>
+                    <td>2017-05-09 15:10:08</td>
+                    <td>117.85.193.171</td>
+                    <td>正常</td>
+                    <td align="center" style="text-align: left">
+                        <a href="#" data-msg="您确定要拉黑此用户吗？">拉黑</a> |
+                        <a href="#" data-msg="您确定要设置超管吗？">设置超管</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要取消热门吗？">取消热门</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要推荐此用户吗？">推荐</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要开启僵尸粉吗？">开启僵尸粉</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要设置为僵尸粉吗？">设置为僵尸粉</a> |
+                        <a href="#">编辑</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要删除此用户吗？">删除</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]" value="9347" title="ID:9347">
+                    </td>
+                    <td align="center">9347</td>
+                    <td>wx_1494313808365</td>
+                    <td>老T</td>
+                    <td>
+                        <img width="25" height="25" src="http://wx.qlogo.cn/mmopen/eH08qelRZywlmAX0biazSia5BeBvLPmXAGroIlye3mRpaNauHRUibAqiaLzdj7aO03BaI2V2Fh4WpA58Fju2IA7kTibLibBY7eicpo2/0">
+                    </td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>2017-05-09 15:10:08</td>
+                    <td>2017-05-09 15:10:08</td>
+                    <td>117.85.193.171</td>
+                    <td>正常</td>
+                    <td align="center" style="text-align: left">
+                        <a href="#" data-msg="您确定要拉黑此用户吗？">拉黑</a> |
+                        <a href="#" data-msg="您确定要设置超管吗？">设置超管</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要取消热门吗？">取消热门</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要推荐此用户吗？">推荐</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要开启僵尸粉吗？">开启僵尸粉</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要设置为僵尸粉吗？">设置为僵尸粉</a> |
+                        <a href="#">编辑</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要删除此用户吗？">删除</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]" value="9347" title="ID:9347">
+                    </td>
+                    <td align="center">9347</td>
+                    <td>wx_1494313808365</td>
+                    <td>老T</td>
+                    <td>
+                        <img width="25" height="25" src="http://wx.qlogo.cn/mmopen/eH08qelRZywlmAX0biazSia5BeBvLPmXAGroIlye3mRpaNauHRUibAqiaLzdj7aO03BaI2V2Fh4WpA58Fju2IA7kTibLibBY7eicpo2/0">
+                    </td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>2017-05-09 15:10:08</td>
+                    <td>2017-05-09 15:10:08</td>
+                    <td>117.85.193.171</td>
+                    <td>正常</td>
+                    <td align="center" style="text-align: left">
+                        <a href="#" data-msg="您确定要拉黑此用户吗？">拉黑</a> |
+                        <a href="#" data-msg="您确定要设置超管吗？">设置超管</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要取消热门吗？">取消热门</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要推荐此用户吗？">推荐</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要开启僵尸粉吗？">开启僵尸粉</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要设置为僵尸粉吗？">设置为僵尸粉</a> |
+                        <a href="#">编辑</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要删除此用户吗？">删除</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]" value="9347" title="ID:9347">
+                    </td>
+                    <td align="center">9347</td>
+                    <td>wx_1494313808365</td>
+                    <td>老T</td>
+                    <td>
+                        <img width="25" height="25" src="http://wx.qlogo.cn/mmopen/eH08qelRZywlmAX0biazSia5BeBvLPmXAGroIlye3mRpaNauHRUibAqiaLzdj7aO03BaI2V2Fh4WpA58Fju2IA7kTibLibBY7eicpo2/0">
+                    </td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>2017-05-09 15:10:08</td>
+                    <td>2017-05-09 15:10:08</td>
+                    <td>117.85.193.171</td>
+                    <td>正常</td>
+                    <td align="center" style="text-align: left">
+                        <a href="#" data-msg="您确定要拉黑此用户吗？">拉黑</a> |
+                        <a href="#" data-msg="您确定要设置超管吗？">设置超管</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要取消热门吗？">取消热门</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要推荐此用户吗？">推荐</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要开启僵尸粉吗？">开启僵尸粉</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要设置为僵尸粉吗？">设置为僵尸粉</a> |
+                        <a href="#">编辑</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要删除此用户吗？">删除</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]" value="9347" title="ID:9347">
+                    </td>
+                    <td align="center">9347</td>
+                    <td>wx_1494313808365</td>
+                    <td>老T</td>
+                    <td>
+                        <img width="25" height="25" src="http://wx.qlogo.cn/mmopen/eH08qelRZywlmAX0biazSia5BeBvLPmXAGroIlye3mRpaNauHRUibAqiaLzdj7aO03BaI2V2Fh4WpA58Fju2IA7kTibLibBY7eicpo2/0">
+                    </td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>2017-05-09 15:10:08</td>
+                    <td>2017-05-09 15:10:08</td>
+                    <td>117.85.193.171</td>
+                    <td>正常</td>
+                    <td align="center" style="text-align: left">
+                        <a href="#" data-msg="您确定要拉黑此用户吗？">拉黑</a> |
+                        <a href="#" data-msg="您确定要设置超管吗？">设置超管</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要取消热门吗？">取消热门</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要推荐此用户吗？">推荐</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要开启僵尸粉吗？">开启僵尸粉</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要设置为僵尸粉吗？">设置为僵尸粉</a> |
+                        <a href="#">编辑</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要删除此用户吗？">删除</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]" value="9347" title="ID:9347">
+                    </td>
+                    <td align="center">9347</td>
+                    <td>wx_1494313808365</td>
+                    <td>老T</td>
+                    <td>
+                        <img width="25" height="25" src="http://wx.qlogo.cn/mmopen/eH08qelRZywlmAX0biazSia5BeBvLPmXAGroIlye3mRpaNauHRUibAqiaLzdj7aO03BaI2V2Fh4WpA58Fju2IA7kTibLibBY7eicpo2/0">
+                    </td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>2017-05-09 15:10:08</td>
+                    <td>2017-05-09 15:10:08</td>
+                    <td>117.85.193.171</td>
+                    <td>正常</td>
+                    <td align="center" style="text-align: left">
+                        <a href="#" data-msg="您确定要拉黑此用户吗？">拉黑</a> |
+                        <a href="#" data-msg="您确定要设置超管吗？">设置超管</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要取消热门吗？">取消热门</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要推荐此用户吗？">推荐</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要开启僵尸粉吗？">开启僵尸粉</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要设置为僵尸粉吗？">设置为僵尸粉</a> |
+                        <a href="#">编辑</a> |
+                        <a href="#" class="js-ajax-dialog-btn" data-msg="您确定要删除此用户吗？">删除</a>
+                    </td>
+                </tr>
+
+
+
+            </tbody>
+            </table>
+        </form>
+        <div class="pagination">
+            <a href="#"> 首页</a>
+            <span class="current">1</span>
+            <a href="#"> 2</a>
+            <a href="#"> 3</a>
+            <a href="#"> 4</a>
+            <a href="#"> 5</a>
+            <a href="#"> 6</a>
+            <a href="#"> 7</a>
+            <a href="#"> 8</a>
+            <a href="#"> 9</a>
+            <a href="#"> 10</a>
+            <span>...</span>
+            <a href="#"> 57 </a>
+            <a href="#"> 58 </a> &nbsp;
+            <a href="#">下一页</a>
+            <a href="#">尾页</a>
+        </div>
+        </div>
+
+
+
+    <script type="text/javascript" src="laydate.dev.js"></script>
+    <script type="text/javascript">
+        laydate({
+            elem: '#J-xl'
+        });
+        laydate({
+            elem: '#J-x2'
+        });
+
+    </script>
+</body>
+</html>

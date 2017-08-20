@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+    <link rel="stylesheet" href="layui/css/myglobal.css"  media="all">
+
+</head>
+<body>
+<div class="layui-form-pane" style="margin-top: 15px;">
+    <div class="layui-form-item" style="float: left;">
+        <label class="layui-form-label">注册时间&nbsp;&nbsp;:&nbsp;&nbsp;</label>
+        <div class="layui-input-inline">
+            <input class="layui-input" placeholder="开始日" id="LAY_demorange_s">
+        </div>
+        <div class="layui-input-inline">
+            <input class="layui-input" placeholder="截止日" id="LAY_demorange_e">
+        </div>
+    </div>
+    <div style="float:left">
+        <label class="layui-form-label">关键字</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="暂支持:用户id/昵称/真实姓名" class="layui-input search-key">
+
+        </div>
+    </div>
+    <div style="float:left;margin-left:55px;">
+        <button class="layui-btn" id="user-search-button">搜索</button>
+    </div>
+</div>
+<div class="layui-form">
+    <table class="layui-table">
+        <!--<colgroup>-->
+            <!--<col width="150">-->
+            <!--<col width="150">-->
+            <!--<col width="200">-->
+            <!--<col>-->
+        <!--</colgroup>-->
+        <thead>
+            <tr style="background:#393D49;color:#fff;">
+                <th>用户ID</th>
+                <th>真实姓名</th>
+                <th>昵称</th>
+                <th>头像</th>
+                <th>余额</th>
+                <th>累计消费</th>
+                <th>注册时间</th>
+                <th>最后登录时间</th>
+                <th>最后登录IP</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="view">
+            <script id="demo" type="text/html">
+                {{#  layui.each(d.list, function(index, item){ }}
+                <tr>
+                    <td>{{ item.user_id }}</td>
+                    <td>{{ item.realname }}</td>
+                    <td>{{ item.nickname }}</td>
+                    <td><img src="{{ item.user_img }}" alt="" class="small-user-jpg"></td>
+                    <td>{{ item.kubi }}</td>
+                    <td>{{ item.total_price }}</td>
+                    <td>{{ item.registertime }}</td>
+                    <td>{{ item.lasttime }}</td>
+                    <td>{{ item.lastip }}</td>
+                    <td><b><a href="javascript:;" style="color:#009688;">审核头像</a></b></td>
+                </tr>
+                {{#  }); }}
+            </script>
+            <!--<div id="view"></div>-->
+        </tbody>
+    </table>
+    <div id="demo7" style="position:absolute;bottom:1px;"></div>
+</div>
+<input type="hidden" id="user-tpl-demo-hidden">
+<script src="layui/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+    layui.use(['laydate','form','laypage','layer','laytpl','element'], function(){
+
+
+        var laydate = layui.laydate
+            ,laypage = layui.laypage
+            ,layer = layui.layer
+            ,$ = layui.jquery
+            ,laytpl = layui.laytpl;
+
+        var start = {
+            min: laydate.now()
+            ,max: '2099-06-16 23:59:59'
+            ,istoday: false
+            ,choose: function(datas){
+                end.min = datas; //开始日选好后，重置结束日的最小日期
+                end.start = datas //将结束日的初始值设定为开始日
+            }
+        };
+
+        var end = {
+            min: laydate.now()
+            ,max: '2099-06-16 23:59:59'
+            ,istoday: false
+            ,choose: function(datas){
+                start.max = datas; //结束日选好后，重置开始日的最大日期
+            }
+        };
+
+
+        document.getElementById('LAY_demorange_s').onclick = function(){
+            start.elem = this;
+            laydate(start);
+        };
+        document.getElementById('LAY_demorange_e').onclick = function(){
+            end.elem = this;
+            laydate(end);
+        };
+
+
+        $.ajax({
+            //提交数据的类型 POST GET
+            type:"POST",
+            //提交的网址
+            url:"http://39.108.104.233/index.php/back2/user/index",
+            //提交的数据
+            data:{page:1,rows:12},
+            //返回数据的格式
+            datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
+            //成功返回之后调用的函数
+            success:function(data){
+                var getTpl = demo.innerHTML;
+                var data_object = $.parseJSON( data );
+                laytpl(getTpl).render(data_object, function(html){
+                    view.innerHTML = html;
+                });
+            },
+            error:function(){
+                alert('访问服务器失败');
+            },
+        });
+
+
+
+        laypage({
+            cont: 'demo7'
+            ,pages: 100
+            ,groups: 5
+            ,skip: true
+            ,jump: function(obj, first){
+                if(!first){
+//                    layer.msg('第 '+ obj.curr +' 页');
+                    $.ajax({
+                        //提交数据的类型 POST GET
+                        type:"POST",
+                        //提交的网址
+                        url:"http://39.108.104.233/index.php/back2/user/index",
+                        //提交的数据
+                        data:{page:obj.curr,rows:12},
+                        //返回数据的格式
+                        datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
+                        //成功返回之后调用的函数
+                        success:function(data){
+                            var getTpl = demo.innerHTML;
+                            var data_object = $.parseJSON( data );
+                            laytpl(getTpl).render(data_object, function(html){
+                                view.innerHTML = html;
+                            });
+                        },
+                        error:function(){
+                            alert('访问服务器失败');
+                        },
+                    });
+                }
+            }
+        });
+
+        //分页模拟渲染
+        var render = function(data, curr){
+            var arr = []
+                    ,thisData = data.concat().splice(curr*nums-nums, nums);
+            layui.each(thisData, function(index, item){
+                arr.push('<li>'+ item +'</li>');
+            });
+            return arr.join('');
+        };
+
+        $('#user-search-button').on('click',function(){
+            layer.msg('搜索功能开发中');
+        });
+
+
+
+
+    });
+
+</script>
+</body>
+</html>
