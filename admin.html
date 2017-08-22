@@ -150,6 +150,7 @@
     </div>
 </div>
 
+<script src="conf/conf.js"></script>
 <script src="layui/layui.js"></script>
 <script>
     //注意：导航 依赖 element 模块，否则无法进行功能性操作
@@ -163,14 +164,13 @@
             //提交数据的类型 POST GET
             type:"POST",
             //提交的网址
-            url:"http://39.108.104.233/index.php/back2/catalog",
+            url:conf_host+"back2/catalog/index",
             //返回数据的格式
             datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
             //成功返回之后调用的函数
             success:function(data){
                 var getTpl = admin_model.innerHTML;
                 var data_object = $.parseJSON(data);
-
                 laytpl(getTpl).render(data_object, function(html){
                     user_view.innerHTML = html;
                 });

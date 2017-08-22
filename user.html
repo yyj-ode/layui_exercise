@@ -21,12 +21,12 @@
     <div style="float:left">
         <label class="layui-form-label">关键字</label>
         <div class="layui-input-block">
-            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="暂支持:用户id/昵称/真实姓名" class="layui-input search-key" id="user_search_key">
+            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="暂支持:用户id/昵称/真实姓名" class="layui-input search-key" id="search_key">
 
         </div>
     </div>
     <div style="float:left;margin-left:55px;">
-        <button class="layui-btn" id="user-search-button">搜索</button>
+        <button class="layui-btn" id="search-button">搜索</button>
     </div>
 </div>
 <div class="layui-form">
@@ -78,12 +78,13 @@
     <div id="demo7" style="position:absolute;bottom:1px;"></div>
 </div>
 <input type="hidden" id="user-tpl-demo-hidden">
+<script src="conf/conf.js"></script>
 <script src="layui/layui.js" charset="utf-8"></script>
 
 <script>
     layui.use(['laydate','form','laypage','layer','laytpl','element'], function(){
         //用户列表页待渲染的模板
-        var demo_user_page = demo.innerHTML;
+        var demo_model = demo.innerHTML;
         var laydate = layui.laydate
             ,laypage = layui.laypage
             ,layer = layui.layer
@@ -125,7 +126,7 @@
             //提交数据的类型 POST GET
             type:"POST",
             //提交的网址
-            url:"http://39.108.104.233/index.php/back2/user/index",
+            url:conf_host+"back2/user/index",
             //提交的数据
             data:{page:1,rows:12},
             //返回数据的格式
@@ -149,21 +150,21 @@
                         if(!first){
                             var start_time = $('#LAY_demorange_s').val();
                             var end_time = $('#LAY_demorange_e').val();
-                            var user_search_key = $('#user_search_key').val();
+                            var search_key = $('#search_key').val();
 //                    layer.msg('第 '+ obj.curr +' 页');
                             $.ajax({
                                 //提交数据的类型 POST GET
                                 type:"POST",
                                 //提交的网址
-                                url:"http://39.108.104.233/index.php/back2/user/index",
+                                url:conf_host+"back2/user/index",
                                 //提交的数据
-                                data:{page:obj.curr,rows:12,start_time:start_time,end_time:end_time,search_key:user_search_key},
+                                data:{page:obj.curr,rows:12,start_time:start_time,end_time:end_time,search_key:search_key},
                                 //返回数据的格式
                                 datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
                                 //成功返回之后调用的函数
                                 success:function(data){
                                     layer.msg('第 '+ obj.curr +' 页');
-                                    var getTpl = demo_user_page;
+                                    var getTpl = demo_model;
                                     var data_object = $.parseJSON( data );
                                     laytpl(getTpl).render(data_object, function(html){
                                         view.innerHTML = html;
@@ -183,23 +184,23 @@
         });
 
 //        搜索，并生成分页
-        $('#user-search-button').on('click',function(){
+        $('#search-button').on('click',function(){
             var start_time = $('#LAY_demorange_s').val();
             var end_time = $('#LAY_demorange_e').val();
-            var user_search_key = $('#user_search_key').val();
+            var search_key = $('#search_key').val();
             $.ajax({
                 //提交数据的类型 POST GET
                 type:"POST",
                 //提交的网址
-                url:"http://39.108.104.233/index.php/back2/user/index",
+                url:conf_host+"back2/user/index",
                 //提交的数据
-                data:{page:1,rows:12,start_time:start_time,end_time:end_time,search_key:user_search_key},
+                data:{page:1,rows:12,start_time:start_time,end_time:end_time,search_key:search_key},
                 //返回数据的格式
                 datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
                 //成功返回之后调用的函数
                 success:function(data){
                     layer.msg('第 '+ 1 +' 页');
-                    var getTpl = demo_user_page;
+                    var getTpl = demo_model;
                     var data_object = $.parseJSON( data );
                     laytpl(getTpl).render(data_object, function(html){
                         view.innerHTML = html;
@@ -214,20 +215,20 @@
                             if(!first){
                                 var start_time = $('#LAY_demorange_s').val();
                                 var end_time = $('#LAY_demorange_e').val();
-                                var user_search_key = $('#user_search_key').val();
+                                var search_key = $('#search_key').val();
                                 $.ajax({
                                     //提交数据的类型 POST GET
                                     type:"POST",
                                     //提交的网址
-                                    url:"http://39.108.104.233/index.php/back2/user/index",
+                                    url:conf_host+"back2/user/index",
                                     //提交的数据
-                                    data:{page:obj.curr,rows:12,start_time:start_time,end_time:end_time,search_key:user_search_key},
+                                    data:{page:obj.curr,rows:12,start_time:start_time,end_time:end_time,search_key:search_key},
                                     //返回数据的格式
                                     datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
                                     //成功返回之后调用的函数
                                     success:function(data){
                                         layer.msg('第 '+ obj.curr +' 页');
-                                        var getTpl = demo_user_page;
+                                        var getTpl = demo_model;
                                         var data_object = $.parseJSON( data );
                                         laytpl(getTpl).render(data_object, function(html){
                                             view.innerHTML = html;

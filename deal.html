@@ -10,20 +10,8 @@
 <body>
 <div class="layui-form">
     <div class="layui-form-pane" style="margin-top: 15px;">
-        <div class="layui-form-item" style="float: left;">
-            <label class="layui-form-label">审核状态</label>
-            <div class="layui-input-inline">
-                <select name="interest" lay-filter="aihao" id="status">
-                    <option value=""></option>
-                    <option value="1,2,3">全部</option>
-                    <option value="1">审核中</option>
-                    <option value="2">审核成功</option>
-                    <option value="3">审核失败</option>
-                </select>
-            </div>
-        </div>
         <div style="float: left;">
-            <label class="layui-form-label">注册时间&nbsp;&nbsp;:&nbsp;&nbsp;</label>
+            <label class="layui-form-label">提现时间&nbsp;&nbsp;:&nbsp;&nbsp;</label>
             <div class="layui-input-inline">
                 <input class="layui-input" placeholder="开始日" id="LAY_demorange_s">
             </div>
@@ -52,15 +40,15 @@
         <!--</colgroup>-->
         <thead>
         <tr style="background:#393D49;color:#fff;">
-            <th>演绎认证id</th>
             <th>用户ID</th>
-            <th>真实姓名</th>
-            <th>手机号</th>
-            <th>身份证</th>
-            <th>审核状态</th>
-            <th>提交时间</th>
-            <th>处理时间</th>
-            <th>操作</th>
+            <th>用户昵称</th>
+            <th>主播id</th>
+            <th>主播昵称</th>
+            <th>礼物id</th>
+            <th>礼物数量</th>
+            <th>礼物价格</th>
+            <th>礼物总价</th>
+            <th>赠送时间</th>
         </tr>
         </thead>
         <tbody id="view">
@@ -70,15 +58,15 @@
         <script id="demo" type="text/html">
             {{#  layui.each(d.list, function(index, item){ }}
             <tr>
-                <td>{{ item.yanyi_id }}</td>
-                <td>{{ item.user_id }}</td>
-                <td>{{ item.realname }}</td>
-                <td>{{ item.mobile }}</td>
-                <td>{{ item.IDcard_number }}</td>
-                <td>{{ item.status }}</td>
-                <td>{{ item.create_time }}</td>
-                <td>{{ item.console_time }}</td>
-                <td><b><a href="javascript:;" style="color:#009688;">审核</a></b></td>
+                <td>{{ item.from_user_id }}</td>
+                <td>{{ item.from_user_name }}</td>
+                <td>{{ item.to_user_id }}</td>
+                <td>{{ item.to_user_name }}</td>
+                <td>{{ item.gift_type }}</td>
+                <td>{{ item.number }}</td>
+                <td>{{ item.gift_price }}</td>
+                <td>{{ item.total_price }}</td>
+                <td>{{ item.pay_time }}</td>
             </tr>
             {{#  }); }}
         </script>
@@ -140,7 +128,7 @@
             //提交数据的类型 POST GET
             type:"POST",
             //提交的网址
-            url:conf_host+"back2/deductive/index",
+            url:conf_host+"back2/deal/index",
             //提交的数据
             data:{page:1,rows:12},
             //返回数据的格式
@@ -165,15 +153,14 @@
                             var start_time = $('#LAY_demorange_s').val();
                             var end_time = $('#LAY_demorange_e').val();
                             var search_key = $('#search_key').val();
-                            var status = $('#status').val();
 //                    layer.msg('第 '+ obj.curr +' 页');
                             $.ajax({
                                 //提交数据的类型 POST GET
                                 type:"POST",
                                 //提交的网址
-                                url:conf_host+"back2/deductive/index",
+                                url:conf_host+"back2/deal/index",
                                 //提交的数据
-                                data:{page:obj.curr,rows:12,start_time:start_time,end_time:end_time,search_key:search_key,status:status},
+                                data:{page:obj.curr,rows:12,start_time:start_time,end_time:end_time,search_key:search_key},
                                 //返回数据的格式
                                 datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
                                 //成功返回之后调用的函数
@@ -203,14 +190,13 @@
             var start_time = $('#LAY_demorange_s').val();
             var end_time = $('#LAY_demorange_e').val();
             var search_key = $('#search_key').val();
-            var status = $('#status').val();
             $.ajax({
                 //提交数据的类型 POST GET
                 type:"POST",
                 //提交的网址
-                url:conf_host+"back2/deductive/index",
+                url:conf_host+"back2/deal/index",
                 //提交的数据
-                data:{page:1,rows:12,start_time:start_time,end_time:end_time,search_key:search_key,status:status},
+                data:{page:1,rows:12,start_time:start_time,end_time:end_time,search_key:search_key},
                 //返回数据的格式
                 datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
                 //成功返回之后调用的函数
@@ -236,9 +222,9 @@
                                     //提交数据的类型 POST GET
                                     type:"POST",
                                     //提交的网址
-                                    url:conf_host+"back2/deductive/index",
+                                    url:conf_host+"back2/deal/index",
                                     //提交的数据
-                                    data:{page:obj.curr,rows:12,start_time:start_time,end_time:end_time,search_key:search_key,status:status},
+                                    data:{page:obj.curr,rows:12,start_time:start_time,end_time:end_time,search_key:search_key},
                                     //返回数据的格式
                                     datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
                                     //成功返回之后调用的函数

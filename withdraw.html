@@ -11,19 +11,19 @@
 <div class="layui-form">
     <div class="layui-form-pane" style="margin-top: 15px;">
         <div class="layui-form-item" style="float: left;">
-            <label class="layui-form-label">审核状态</label>
+            <label class="layui-form-label">提现状态</label>
             <div class="layui-input-inline">
                 <select name="interest" lay-filter="aihao" id="status">
                     <option value=""></option>
-                    <option value="1,2,3">全部</option>
-                    <option value="1">审核中</option>
-                    <option value="2">审核成功</option>
-                    <option value="3">审核失败</option>
+                    <option value="0,1,2">全部</option>
+                    <option value="0">等待</option>
+                    <option value="1">成功</option>
+                    <option value="2">失败</option>
                 </select>
             </div>
         </div>
         <div style="float: left;">
-            <label class="layui-form-label">注册时间&nbsp;&nbsp;:&nbsp;&nbsp;</label>
+            <label class="layui-form-label">提现时间&nbsp;&nbsp;:&nbsp;&nbsp;</label>
             <div class="layui-input-inline">
                 <input class="layui-input" placeholder="开始日" id="LAY_demorange_s">
             </div>
@@ -52,15 +52,13 @@
         <!--</colgroup>-->
         <thead>
         <tr style="background:#393D49;color:#fff;">
-            <th>演绎认证id</th>
             <th>用户ID</th>
-            <th>真实姓名</th>
-            <th>手机号</th>
-            <th>身份证</th>
-            <th>审核状态</th>
+            <th>用户昵称</th>
+            <th>人民币金额</th>
+            <th>兑换库币</th>
+            <th>商户订单号</th>
+            <th>订单状态</th>
             <th>提交时间</th>
-            <th>处理时间</th>
-            <th>操作</th>
         </tr>
         </thead>
         <tbody id="view">
@@ -70,15 +68,13 @@
         <script id="demo" type="text/html">
             {{#  layui.each(d.list, function(index, item){ }}
             <tr>
-                <td>{{ item.yanyi_id }}</td>
                 <td>{{ item.user_id }}</td>
-                <td>{{ item.realname }}</td>
-                <td>{{ item.mobile }}</td>
-                <td>{{ item.IDcard_number }}</td>
-                <td>{{ item.status }}</td>
+                <td>{{ item.nickname }}</td>
+                <td>{{ item.amount }}</td>
+                <td>{{ item.kubi }}</td>
+                <td>{{ item.order_number }}</td>
+                <td>{{ item.pay_status }}</td>
                 <td>{{ item.create_time }}</td>
-                <td>{{ item.console_time }}</td>
-                <td><b><a href="javascript:;" style="color:#009688;">审核</a></b></td>
             </tr>
             {{#  }); }}
         </script>
@@ -140,7 +136,7 @@
             //提交数据的类型 POST GET
             type:"POST",
             //提交的网址
-            url:conf_host+"back2/deductive/index",
+            url:conf_host+"back2/withdraw/index",
             //提交的数据
             data:{page:1,rows:12},
             //返回数据的格式
@@ -171,7 +167,7 @@
                                 //提交数据的类型 POST GET
                                 type:"POST",
                                 //提交的网址
-                                url:conf_host+"back2/deductive/index",
+                                url:conf_host+"back2/withdraw/index",
                                 //提交的数据
                                 data:{page:obj.curr,rows:12,start_time:start_time,end_time:end_time,search_key:search_key,status:status},
                                 //返回数据的格式
@@ -208,7 +204,7 @@
                 //提交数据的类型 POST GET
                 type:"POST",
                 //提交的网址
-                url:conf_host+"back2/deductive/index",
+                url:conf_host+"back2/withdraw/index",
                 //提交的数据
                 data:{page:1,rows:12,start_time:start_time,end_time:end_time,search_key:search_key,status:status},
                 //返回数据的格式
@@ -236,7 +232,7 @@
                                     //提交数据的类型 POST GET
                                     type:"POST",
                                     //提交的网址
-                                    url:conf_host+"back2/deductive/index",
+                                    url:conf_host+"back2/withdraw/index",
                                     //提交的数据
                                     data:{page:obj.curr,rows:12,start_time:start_time,end_time:end_time,search_key:search_key,status:status},
                                     //返回数据的格式
