@@ -8,28 +8,28 @@
 
 </head>
 <body>
-<div class="layui-form">
-    <div class="layui-form-pane" style="margin-top: 15px;">
-        <div class="layui-form-item" style="float: left;">
-            <label class="layui-form-label">提现时间&nbsp;&nbsp;:&nbsp;&nbsp;</label>
-            <div class="layui-input-inline">
-                <input class="layui-input" placeholder="开始日" id="LAY_demorange_s">
-            </div>
-            <div class="layui-input-inline">
-                <input class="layui-input" placeholder="截止日" id="LAY_demorange_e">
-            </div>
+<div class="layui-form-pane" style="margin-top: 15px;display:none;">
+    <div class="layui-form-item" style="float: left;">
+        <label class="layui-form-label">注册时间&nbsp;&nbsp;:&nbsp;&nbsp;</label>
+        <div class="layui-input-inline">
+            <input class="layui-input" placeholder="开始日" id="LAY_demorange_s">
         </div>
-        <div style="float:left">
-            <label class="layui-form-label">关键字</label>
-            <div class="layui-input-block">
-                <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="暂支持:用户id/昵称/真实姓名" class="layui-input search-key" id="search_key">
-            </div>
-        </div>
-        <div style="float:left;margin-left:55px;">
-            <button class="layui-btn" id="search-button">搜索</button>
+        <div class="layui-input-inline">
+            <input class="layui-input" placeholder="截止日" id="LAY_demorange_e">
         </div>
     </div>
+    <div style="float:left">
+        <label class="layui-form-label">关键字</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="暂支持:用户id/昵称/真实姓名" class="layui-input search-key" id="search_key">
 
+        </div>
+    </div>
+    <div style="float:left;margin-left:55px;">
+        <button class="layui-btn" id="search-button">搜索</button>
+    </div>
+</div>
+<div class="layui-form">
     <table class="layui-table">
         <!--以下代码可以设定表格各个字段的宽度-->
         <!--<colgroup>-->
@@ -40,15 +40,12 @@
         <!--</colgroup>-->
         <thead>
         <tr style="background:#393D49;color:#fff;">
-            <th>用户ID</th>
-            <th>用户昵称</th>
-            <th>主播id</th>
-            <th>主播昵称</th>
-            <th>礼物id</th>
-            <th>礼物数量</th>
-            <th>礼物价格</th>
-            <th>礼物总价</th>
-            <th>赠送时间</th>
+            <th>id</th>
+            <th>发布者昵称</th>
+            <th>通告标题</th>
+            <th>发布时间</th>
+            <th>截止时间</th>
+            <th>操作</th>
         </tr>
         </thead>
         <tbody id="view">
@@ -58,15 +55,12 @@
         <script id="demo" type="text/html">
             {{#  layui.each(d.list, function(index, item){ }}
             <tr>
-                <td>{{ item.from_user_id }}</td>
-                <td>{{ item.from_user_name }}</td>
-                <td>{{ item.to_user_id }}</td>
-                <td>{{ item.to_user_name }}</td>
-                <td>{{ item.gift_type }}</td>
-                <td>{{ item.number }}</td>
-                <td>{{ item.gift_price }}</td>
-                <td>{{ item.total_price }}</td>
-                <td>{{ item.pay_time }}</td>
+                <td>{{ item.schedule_id }}</td>
+                <td>{{ item.nickname }}</td>
+                <td>{{ item.schedule_title }}</td>
+                <td>{{ item.createtime }}</td>
+                <td>{{ item.acttime }}</td>
+                <td><b><a href="javascript:;" style="color:#009688;">去审核</a></b></td>
             </tr>
             {{#  }); }}
         </script>
@@ -80,18 +74,14 @@
 <script src="layui/layui.js" charset="utf-8"></script>
 
 <script>
-    layui.use(['form','laydate','laypage','layer','laytpl','element','layedit'], function(){
+    layui.use(['laydate','form','laypage','layer','laytpl','element'], function(){
         //用户列表页待渲染的模板
         var demo_model = demo.innerHTML;
-
-        var form = layui.form
-                ,layer = layui.layer
-                ,layedit = layui.layedit
-                ,laydate = layui.laydate
+        var laydate = layui.laydate
                 ,laypage = layui.laypage
+                ,layer = layui.layer
                 ,$ = layui.jquery
                 ,laytpl = layui.laytpl;
-
 
         var start = {
             min: '1970-01-01'
@@ -128,7 +118,7 @@
             //提交数据的类型 POST GET
             type:"POST",
             //提交的网址
-            url:conf_host+"back2/deal/index",
+            url:conf_host+"back2/schedule/audit",
             //提交的数据
             data:{page:1,rows:12},
             //返回数据的格式
@@ -158,7 +148,7 @@
                                 //提交数据的类型 POST GET
                                 type:"POST",
                                 //提交的网址
-                                url:conf_host+"back2/deal/index",
+                                url:conf_host+"back2/schedule/audit",
                                 //提交的数据
                                 data:{page:obj.curr,rows:12,start_time:start_time,end_time:end_time,search_key:search_key},
                                 //返回数据的格式
@@ -194,7 +184,7 @@
                 //提交数据的类型 POST GET
                 type:"POST",
                 //提交的网址
-                url:conf_host+"back2/deal/index",
+                url:conf_host+"back2/schedule/audit",
                 //提交的数据
                 data:{page:1,rows:12,start_time:start_time,end_time:end_time,search_key:search_key},
                 //返回数据的格式
@@ -222,7 +212,7 @@
                                     //提交数据的类型 POST GET
                                     type:"POST",
                                     //提交的网址
-                                    url:conf_host+"back2/deal/index",
+                                    url:conf_host+"back2/schedule/audit",
                                     //提交的数据
                                     data:{page:obj.curr,rows:12,start_time:start_time,end_time:end_time,search_key:search_key},
                                     //返回数据的格式
