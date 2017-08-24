@@ -56,7 +56,7 @@
                 <td>{{ item.schedule_id }}</td>
                 <td>{{ item.schedule_title }}</td>
                 <td><img style="width: 222px;" src="{{ item.schedule_img }}" alt=""></td>
-                <td><b><a href="javascript:;" style="color:#009688;">轮播图上架</a></b></td>
+                <td><b><a href="javascript:;" style="color:#009688;" id="{{ item.schedule_id }}">轮播图上架</a></b></td>
             </tr>
             {{#  }); }}
         </script>
@@ -128,6 +128,36 @@
                     view.innerHTML = html;
                 });
 
+                //        轮播图上架
+                $("a").on('click',function(){
+                    var schedule_id = this.id;
+                    $.ajax({
+                        //提交数据的类型 POST GET
+                        type:"POST",
+                        //提交的网址
+                        url:conf_host+"back2/banner/add",
+                        //提交的数据
+                        data:{schedule_id:schedule_id},
+                        //返回数据的格式
+                        datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
+                        //成功返回之后调用的函数
+                        success:function(data){
+                            var data_object = $.parseJSON( data );
+                            if(data_object.status == '成功'){
+                                layer.msg('轮播图上架成功，1秒后刷新页面');
+                                setTimeout(function () {
+                                    window.location.reload();
+                                }, 1000);
+                            }else{
+                                layer.msg(data_object.reason);
+                            }
+                        },
+                        error:function(){
+                            lay.msg('轮播图上架失败');
+                        }
+                    });
+                });
+
 //                生成分页
                 laypage({
                     cont: 'demo7'
@@ -193,6 +223,37 @@
                     laytpl(getTpl).render(data_object, function(html){
                         view.innerHTML = html;
                     });
+
+                    //        轮播图上架
+                    $("a").on('click',function(){
+                        var schedule_id = this.id;
+                        $.ajax({
+                            //提交数据的类型 POST GET
+                            type:"POST",
+                            //提交的网址
+                            url:conf_host+"back2/banner/add",
+                            //提交的数据
+                            data:{schedule_id:schedule_id},
+                            //返回数据的格式
+                            datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
+                            //成功返回之后调用的函数
+                            success:function(data){
+                                var data_object = $.parseJSON( data );
+                                if(data_object.status == '成功'){
+                                    layer.msg('轮播图上架成功，1秒后刷新页面');
+                                    setTimeout(function () {
+                                        window.location.reload();
+                                    }, 1000);
+                                }else{
+                                    layer.msg(data_object.reason);
+                                }
+                            },
+                            error:function(){
+                                lay.msg('轮播图上架失败');
+                            }
+                        });
+                    });
+
 //                    重新生成分页
                     laypage({
                         cont: 'demo7'
