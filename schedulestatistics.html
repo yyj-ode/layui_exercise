@@ -10,8 +10,8 @@
 </head>
 <body>
 
-<div class="layui-form-pane" style="margin-top: 15px;display:none">
-    <div class="layui-form-item" style="float: left;">
+<div class="layui-form-pane" style="margin-top: 15px;">
+    <div class="layui-form-item" style="float: left;display:none;">
         <label class="layui-form-label">注册时间&nbsp;&nbsp;:&nbsp;&nbsp;</label>
         <div class="layui-input-inline">
             <input class="layui-input" placeholder="开始日" id="LAY_demorange_s">
@@ -20,10 +20,10 @@
             <input class="layui-input" placeholder="截止日" id="LAY_demorange_e">
         </div>
     </div>
-    <div style="float:left">
+    <div style="float:left" class="layui-form-item" >
         <label class="layui-form-label">关键字</label>
         <div class="layui-input-block">
-            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="暂支持:用户id/昵称/真实姓名" class="layui-input search-key" id="search_key">
+            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="通告标题" class="layui-input search-key" id="search_key">
 
         </div>
     </div>
@@ -247,6 +247,16 @@
                 }
             });
 
+        });
+
+        $(function(){
+            document.onkeydown = function(e){
+                var ev = document.all ? window.event : e;
+                if(ev.keyCode==13) {
+                    $('#search-button').click();
+
+                }
+            }
         });
 
     });
