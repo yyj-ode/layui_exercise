@@ -12,7 +12,7 @@
 <body>
 
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-    <legend>身份认证</legend>
+    <legend>演绎认证</legend>
 </fieldset>
 
 <form class="layui-form layui-form-pane" action="javascript:;">
@@ -22,6 +22,18 @@
 <script id="demo" type="text/html">
 
     <div class="layui-form-item">
+        <label class="layui-form-label">用户id</label>
+        <div class="layui-input-inline">
+            <input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input" disabled value="{{d.user_id}}">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户类型</label>
+        <div class="layui-input-inline">
+            <input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input" disabled value="{{d.user_type_concat}}">
+        </div>
+    </div>
+    <div class="layui-form-item">
         <label class="layui-form-label">用户昵称</label>
         <div class="layui-input-inline">
             <input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input" disabled value="{{d.nickname}}">
@@ -30,7 +42,25 @@
     <div class="layui-form-item">
         <label class="layui-form-label">真实姓名</label>
         <div class="layui-input-inline">
-            <input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input" disabled value="{{d.nickname}}">
+            <input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input" disabled value="{{d.realname}}">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">性别</label>
+        <div class="layui-input-inline">
+            <input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input" disabled value="{{d.sex}}">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">三围</label>
+        <div class="layui-input-inline">
+            <input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input" disabled value="{{d.threedimensional}}">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">出生年月</label>
+        <div class="layui-input-inline">
+            <input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input" disabled value="{{d.user_birthday}}">
         </div>
     </div>
     <div class="layui-form-item">
@@ -49,6 +79,21 @@
         <label class="layui-form-label">身份证号</label>
         <div class="layui-input-block">
             <input type="text" name="identity" placeholder="" autocomplete="off" class="layui-input" disabled value="{{d.IDcard_number}}">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">手持证件照</label>
+        <div class="layui-input-block">
+
+            <img src="{{d.user_positive}}" style="width:300px;" alt="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">剧照</label>
+        <div class="layui-input-block">
+            {{#  layui.each(d.imgs, function(index, item){ }}
+                <img src="{{item}}" style="width:200px;" alt="">
+            {{#  }); }}
         </div>
     </div>
     {{# if(d.status == '审核中'){ }}
@@ -85,12 +130,13 @@
         var $ = layui.jquery
                 ,laytpl = layui.laytpl;
         var url = window.location.href;
-        var id = url.substr(url.indexOf('id=')+3);
+        var yanyi_id = url.substr(url.indexOf('yanyi_id=')+9);
+//        alert(yanyi_id);
 //        获取身份认证详情数据
         $.ajax({
             type:"POST",
-            url:conf_host+"back2/identity/getDetail",
-            data:{id:id},
+            url:conf_host+"back2/deductive/getDetail",
+            data:{yanyi_id:yanyi_id},
             datatype:"json",
             success:function(data){
 
@@ -116,15 +162,15 @@
                                 ,reason= $('#reason').val();
                         $.ajax({
                             type:"POST",
-                            url:conf_host+"back2/identity/audit",
-                            data:{id:id,user_id:user_id,status:status,reason:reason},
+                            url:conf_host+"back2/deductive/audit",
+                            data:{yanyi_id:yanyi_id,user_id:user_id,status:status,reason:reason},
                             datatype:"json",
                             success:function(data){
                                 var data_object = $.parseJSON( data );
                                 if(data_object.message == '审核成功'){
                                     layer.msg('审核成功,2秒后跳转至列表页');
                                     setTimeout(function () {
-                                        window.location.href = 'identity.html';
+                                        window.location.href = 'deductive.html';
                                     }, 2000);
                                 }else{
                                     layer.msg('审核失败，请重新审核');
