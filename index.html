@@ -55,7 +55,9 @@ $(function(){
 			success:function(data){
 				var data_object = $.parseJSON( data );
 				if(data_object.status == 1){
-					location.href = "admin.html";
+
+//					cookie不会做，暂时用get传值来解决目录管理的问题
+					location.href = "admin.html?user=" + user;
 				}else{
 					layer.msg('账号或密码错误');
 				}
@@ -64,6 +66,9 @@ $(function(){
 				layer.msg('访问服务器失败');
 			}
 		});
+
+
+
 	});
 });
 </script>
