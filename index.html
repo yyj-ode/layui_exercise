@@ -21,19 +21,20 @@
 		 <em>Management System</em>
 	</h1>
 	<div class="layui-user-icon larry-login">
-		 <input type="text" placeholder="账号" class="login_txtbx"/>
+		 <input type="text" placeholder="账号" class="login_txtbx" id="user"/>
 	</div>
 	<div class="layui-pwd-icon larry-login">
-		 <input type="password" placeholder="密码" class="login_txtbx"/>
+		 <input type="password" placeholder="密码" class="login_txtbx" id="pwd" />
 	</div>
     <div class="layui-submit larry-login">
-    	<input type="button" value="立即登陆" class="submit_btn"/>
+    	<input type="button" value="立即登陆" class="submit_btn" />
     </div>
     <div class="layui-login-text">
     	<p>2017 &copy; Written by yyj-ode &nbsp;&nbsp; 演库 版权所有</p>
     </div>
 </div>
 <script type="text/javascript" src="layui/lay/dest/layui.all.js"></script>
+<script type="text/javascript" src="conf/conf.js"></script>
 <script type="text/javascript" src="layui/login.js"></script>
 <script type="text/javascript" src="layui/jparticle.jquery.js"></script>
 <script type="text/javascript">
@@ -44,7 +45,25 @@ $(function(){
 	});
 	//登录链接测试，使用时可删除
 	$(".submit_btn").click(function(){
-	  location.href="admin.html";
+		var user=$('#user').val();
+		var pwd=$('#pwd').val();
+		$.ajax({
+			type:"POST",
+			url:conf_host+"back2/login/dologin",
+			data:{user:user,pwd:pwd},
+			datatype:'json',
+			success:function(data){
+				var data_object = $.parseJSON( data );
+				if(data_object.status == 1){
+					location.href = "admin.html";
+				}else{
+					layer.msg('账号或密码错误');
+				}
+			},
+			error:function(){
+				layer.msg('访问服务器失败');
+			}
+		});
 	});
 });
 </script>
