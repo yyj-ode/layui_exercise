@@ -37,6 +37,7 @@
 <script type="text/javascript" src="conf/conf.js"></script>
 <script type="text/javascript" src="layui/login.js"></script>
 <script type="text/javascript" src="layui/jparticle.jquery.js"></script>
+<script type="text/javascript" src="jqueryCookie/jquery.cookie.js"></script>
 <script type="text/javascript">
 $(function(){
 	$(".layui-canvs").jParticle({
@@ -57,6 +58,8 @@ $(function(){
 				if(data_object.status == 1){
 
 //					cookie不会做，暂时用get传值来解决目录管理的问题
+					$.cookie('the_cookie', 'the_value', { expires: 7, path: '/' });
+
 					location.href = "admin.html?user=" + user;
 				}else{
 					layer.msg('账号或密码错误');
