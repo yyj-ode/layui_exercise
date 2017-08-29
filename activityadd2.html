@@ -15,7 +15,7 @@
     <legend>活动区轮播图添加</legend>
 </fieldset>
 
-<form class="layui-form" action="http://back.yankushidai.com/index.php/back2/activity/activityImgUpload" enctype="multipart/form-data" method="post" >
+<form class="layui-form" action="" enctype="multipart/form-data" method="post" id="form">
     <div class="layui-form-item">
         <label class="layui-form-label">活动网址</label>
         <div class="layui-input-block">
@@ -37,7 +37,11 @@
 <script>
     //Demo
     layui.use('form', function(){
-        var form = layui.form();
+        var form = layui.form()
+                ,$ = layui.jquery;
+//        $("#form").action(conf_host+"back2/activity/activityImgUpload");
+        $("#form").attr('action',conf_host+"back2/activity/activityImgUpload");
+
     });
 </script>
 </body>
