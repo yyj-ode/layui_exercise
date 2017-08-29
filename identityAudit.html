@@ -45,7 +45,7 @@
             <input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input" value="身份证" disabled>
         </div>
     </div>
-    <div class="layui-form-item">
+    <div class="layui-form-item" style="float:left">
         <label class="layui-form-label">身份证号</label>
         <div class="layui-input-block">
             <input type="text" name="identity" placeholder="" autocomplete="off" class="layui-input" disabled value="{{d.IDcard_number}}">
@@ -59,7 +59,7 @@
         </div>
     </div>
     {{# if(d.status == '审核中'){ }}
-    <div class="layui-form-item" pane="">
+    <div class="layui-form-item" pane="" style="float:left">
         <label class="layui-form-label">审核状态</label>
         <div class="layui-input-block">
             <input type="radio" name="status" value="2" title="成功">
