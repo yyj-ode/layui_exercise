@@ -19,52 +19,64 @@
     <div class="layui-form-item">
         <label class="layui-form-label">通告图片</label>
         <div class="layui-input-inline" style="margin-top:5px;">
-            <input type="file" name="activity_img" />
+            <input type="file" name="schedule_img" />
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">通告标题</label>
         <div class="layui-input-block">
-            <input type="text" name="activity_url" placeholder="请输入标题" autocomplete="off" class="layui-input">
+            <input type="text" name="schedule_title" placeholder="请输入标题" autocomplete="off" class="layui-input">
         </div>
     </div>
+
     <div class="layui-form-item">
         <label class="layui-form-label">城市</label>
         <div class="layui-input-inline">
-            <select name="quiz1">
-                <option value="">请选择省</option>
-                <option value="浙江" selected="">浙江省</option>
-                <option value="你的工号">江西省</option>
-                <option value="你最喜欢的老师">福建省</option>
-            </select>
-        </div>
-        <div class="layui-input-inline">
-            <select name="quiz2">
-                <option value="">请选择市</option>
-                <option value="杭州">杭州</option>
-                <option value="宁波" disabled="">宁波</option>
-                <option value="温州">温州</option>
-                <option value="温州">台州</option>
-                <option value="温州">绍兴</option>
+            <select name="city">
+                <option value="">请选择城市</option>
+                <option value="42">上海市</option>
+                <option value="43">天津市</option>
+                <option value="45">邯郸市</option>
+                <option value="46">晋城市</option>
+                <option value="47">临汾市</option>
+                <option value="49">北京市</option>
+                <option value="50">杭州市</option>
+                <option value="51">青岛市</option>
+                <option value="52">深圳市</option>
+                <option value="53">三亚市</option>
+                <option value="54">广州市</option>
+                <option value="55">西安市</option>
+                <option value="56">南京市</option>
+                <option value="57">金华市</option>
             </select>
         </div>
     </div>
+
+    <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label">城市</label>-->
+        <!--<div class="layui-input-inline">-->
+            <!--<select name="province"></select>-->
+        <!--</div>-->
+        <!--<div class="layui-input-inline">-->
+            <!--<select name="city" id="city" ></select>-->
+        <!--</div>-->
+    <!--</div>-->
     <div class="layui-form-item">
         <label class="layui-form-label">工作地点</label>
         <div class="layui-input-inline">
-            <input type="text" name="activity_url" placeholder="请输入工作地点" autocomplete="off" class="layui-input">
+            <input type="text" name="address" placeholder="请输入工作地点" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">截止日期</label>
         <div class="layui-input-inline">
-            <input type="text" name="date" id="date" lay-verify="date" placeholder="请选择截止日期" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+            <input type="text" name="acttime" id="date" lay-verify="date" placeholder="请选择截止日期" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">性别要求</label>
         <div class="layui-input-inline">
-            <select name="interest" lay-filter="aihao" id="status1">
+            <select name="sex" lay-filter="aihao" id="status1">
                 <option value="">性别要求</option>
                 <option value="0">不限</option>
                 <option value="1">男</option>
@@ -75,7 +87,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">认证要求</label>
         <div class="layui-input-inline">
-            <select name="interest" lay-filter="aihao" id="status2">
+            <select name="audit" lay-filter="aihao" id="status2">
                 <option value="">认证要求</option>
                 <option value="1">不限</option>
                 <option value="2">实名认证</option>
@@ -86,14 +98,14 @@
     <div class="layui-form-item">
         <label class="layui-form-label">通告类型</label>
         <div class="layui-input-inline">
-            <select name="interest" lay-filter="aihao" id="status3">
+            <select name="schedule_type" lay-filter="aihao" id="status3">
                 <option value="">通告类型</option>
-                <option value="1">影视招募</option>
-                <option value="2">模特招募</option>
-                <option value="3">群众招募</option>
+                <option value="0">影视招募</option>
+                <option value="1">模特招募</option>
+                <option value="2">群众招募</option>
                 <option value="3">主播招募</option>
-                <option value="3">主持招募</option>
-                <option value="3">歌手招募</option>
+                <option value="4">主持招募</option>
+                <option value="5">歌手招募</option>
             </select>
         </div>
     </div>
@@ -107,10 +119,10 @@
                 </ul>
                 <div class="layui-tab-content">
                     <div class="layui-tab-item layui-show">
-                        <textarea placeholder="请输入内容" class="layui-textarea" id="reason"></textarea>
+                        <textarea placeholder="请输入内容" class="layui-textarea" id="reason" name="schedule_content"></textarea>
                     </div>
                     <div class="layui-tab-item">
-                        <input type="file" name="schedule_content" />
+                        <input type="file" name="content" />
                     </div>
                 </div>
             </div>
@@ -123,16 +135,20 @@
 <script src="conf/conf.js"></script>
 <script src="layui/layui.js" charset="utf-8"></script>
 <script>
-    //Demo
     layui.use(['form','laydate','element'], function(){
         var form = layui.form()
                 ,$ = layui.jquery
                 ,element = layui.element()
                 ,laydate = layui.laydate;
 //        $("#form").action(conf_host+"back2/activity/activityImgUpload");
-        $("#form").attr('action',conf_host+"Version1/my/schedule");
+        $("#form").attr('action',conf_host+"back2/schedule/scheduleAdd");
 
     });
 </script>
+
+<!--<script src="dist/scripts/PCASClass.js" charset="utf-8"></script>-->
+<!--<script type="text/javascript">-->
+    <!--new PCAS("province","city","请选择省份","请选择城市") ;-->
+<!--</script>-->
 </body>
 </html>
