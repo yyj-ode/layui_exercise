@@ -80,7 +80,7 @@
         <div class="layui-input-block">
             <input type="radio" name="status" value="1" title="成功">
             <input type="radio" name="status" value="0" title="审核中" checked="">
-            <input type="radio" name="status" value="4" title="失败">
+            <input type="radio" name="status" value="3" title="失败">
         </div>
     </div>
     <div class="layui-form-item layui-form-text">
@@ -138,21 +138,21 @@
                         var user_id = $('#user_id').val()
                                 ,status = $('input:radio[name="status"]:checked').val()
                                 ,reason= $('#reason').val();
+                        alert(user_id);alert(schedule_id);alert(status);alert(reason);
                         $.ajax({
                             type:"POST",
-//                            暂无接口
-//                            url:conf_host+"back2/identity/audit",
-                            data:{id:id,user_id:user_id,status:status,reason:reason},
+                            url:conf_host+"back2/schedule/scheduleAudit",
+                            data:{schedule_id:schedule_id,user_id:user_id,status:status,reason:reason},
                             datatype:"json",
                             success:function(data){
                                 var data_object = $.parseJSON( data );
                                 if(data_object.message == '审核成功'){
                                     layer.msg('审核成功,2秒后跳转至列表页');
                                     setTimeout(function () {
-                                        window.location.href = 'identity.html';
+                                        window.location.href = 'scheduleaudit.html';
                                     }, 2000);
                                 }else{
-                                    layer.msg('审核失败，请重新审核');
+                                    layer.msg(data_object.message);
                                 }
                             },
                             error:function(){
