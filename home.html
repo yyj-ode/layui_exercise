@@ -93,11 +93,11 @@
                     </tr>
                     <tr>
                         <td><span class="red">待实名审核数量</span></td>
-                        <td>{{ d.identity_wating_num }}</td>
+                        <td><span class="red">{{ d.identity_wating_num }}</span></td>
                     </tr>
                     <tr>
                         <td><span class="red">待演绎审核数量</span></td>
-                        <td>{{ d.yanyi_wating_num }}</td>
+                        <td><span class="red">{{ d.yanyi_wating_num }}</span></td>
                     </tr>
                     <tr>
                         <td>充值总金额</td>
@@ -135,22 +135,14 @@
                     </tr>
                     </thead>
                     <tbody>
+                    {{#  layui.each(d.hot_anchor, function(index, item){ }}
                     <tr>
                         <td>
-                            <table class="layui-table">
-                                <tbody>
-                                {{#  layui.each(d.hot_anchor, function(index, item){ }}
-                                <tr>
-                                    <td>
-                                        <img src="{{ item.user_img }}" alt="">
-                                        <span class="red"> &nbsp;&nbsp;{{ item.nickname }} &nbsp;&nbsp; 粉丝量: {{ item.num }} </span>
-                                    </td>
-                                </tr>
-                                {{#  }); }}
-                                </tbody>
-                            </table>
+                            <img src="{{ item.user_img }}" alt="">
+                            <span class="red"> &nbsp;&nbsp;{{ item.nickname }} &nbsp;&nbsp; 粉丝量: {{ item.num }} </span>
                         </td>
                     </tr>
+                    {{#  }); }}
                     </tbody>
                 </table>
                 <table class="layui-table">
@@ -165,19 +157,11 @@
                     </tr>
                     </thead>
                     <tbody>
+                    {{#  layui.each(d.hot_enroll, function(index, item){ }}
                     <tr>
-                        <td>
-                            <table class="layui-table">
-                                <tbody>
-                                {{#  layui.each(d.hot_enroll, function(index, item){ }}
-                                <tr>
-                                    <td>{{ item.schedule_title }}：<span class="red">{{ item.num }}</span></td>
-                                </tr>
-                                {{#  }); }}
-                                </tbody>
-                            </table>
-                        </td>
+                        <td>{{ item.schedule_title }}：<span class="red">{{ item.num }}</span></td>
                     </tr>
+                    {{#  }); }}
                     </tbody>
                 </table>
             </td>
@@ -194,19 +178,11 @@
                     </tr>
                     </thead>
                     <tbody>
+                    {{#  layui.each(d.schedule, function(index, item){ }}
                     <tr>
-                        <td>
-                            <table class="layui-table">
-                                <tbody>
-                                {{#  layui.each(d.schedule, function(index, item){ }}
-                                <tr>
-                                    <td>{{ item.schedule_title }}：<span class="red">{{ item.create_time }}</span></td>
-                                </tr>
-                                {{#  }); }}
-                                </tbody>
-                            </table>
-                        </td>
+                        <td>{{ item.schedule_title }}：<span class="red">{{ item.create_time }}</span></td>
                     </tr>
+                    {{#  }); }}
                     </tbody>
                 </table>
             </td>

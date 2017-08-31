@@ -44,7 +44,6 @@ $(function(){
 		background: "#141414",
 		color: "#E6E6E6"
 	});
-	//登录链接测试，使用时可删除
 	$(".submit_btn").click(function(){
 		var user=$('#user').val();
 		var pwd=$('#pwd').val();
@@ -56,11 +55,8 @@ $(function(){
 			success:function(data){
 				var data_object = $.parseJSON( data );
 				if(data_object.status == 1){
-
-//					cookie不会做，暂时用get传值来解决目录管理的问题
-					$.cookie('the_cookie', 'the_value', { expires: 7, path: '/' });
-
-					location.href = "admin.html?user=" + user;
+					$.cookie('user', data_object.user, { expires: 7, path: '/' });
+					location.href = "admin.html";
 				}else{
 					layer.msg('账号或密码错误');
 				}
