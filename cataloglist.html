@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+    <link rel="stylesheet" href="layui/css/myglobal.css"  media="all">
+
+</head>
+<body>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>目录管理</legend>
+</fieldset>
+
+<button class="layui-btn">添加目录</button>
+
+<table class="layui-table" style="vertical-align: top;">
+    <colgroup>
+        <col width="111">
+        <col width="200">
+        <col width="200">
+        <col width="200">
+        <col>
+    </colgroup>
+    <thead>
+    <tr style="background:#393D49;color:#fff;">
+        <th>目录id</th>
+        <th>目录名称</th>
+        <th>父级目录</th>
+        <th>目录等级</th>
+        <th>视图名称</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>后台首页</td>
+        <td>1</td>
+        <td>1</td>
+        <td>home</td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>用户管理</td>
+        <td>0</td>
+        <td>1</td>
+        <td></td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>11</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本站用户</td>
+        <td>2</td>
+        <td>2</td>
+        <td>user</td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>12</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;身份验证</td>
+        <td>2</td>
+        <td>2</td>
+        <td>identity</td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>13</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;演绎认证</td>
+        <td>2</td>
+        <td>2</td>
+        <td>deductive</td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>财务管理</td>
+        <td>0</td>
+        <td>1</td>
+        <td></td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>14</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;充值记录</td>
+        <td>3</td>
+        <td>2</td>
+        <td>recharge</td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>15</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;提现记录</td>
+        <td>3</td>
+        <td>2</td>
+        <td>withdraw</td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>16</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;消费记录</td>
+        <td>3</td>
+        <td>2</td>
+        <td>deal</td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>直播管理</td>
+        <td>0</td>
+        <td>1</td>
+        <td></td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>17</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;直播列表</td>
+        <td>0</td>
+        <td>1</td>
+        <td>livelist</td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>18</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;直播监控</td>
+        <td>0</td>
+        <td>1</td>
+        <td>livecontrol</td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>19</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;系统消息</td>
+        <td>0</td>
+        <td>1</td>
+        <td>message</td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>20</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户举报</td>
+        <td>0</td>
+        <td>1</td>
+        <td>report</td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>21</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;直播记录</td>
+        <td>0</td>
+        <td>1</td>
+        <td>liverecord</td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>礼物管理</td>
+        <td>0</td>
+        <td>1</td>
+        <td></td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;礼物列表</td>
+        <td>0</td>
+        <td>1</td>
+        <td>giftlist</td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>通告管理</td>
+        <td>0</td>
+        <td>1</td>
+        <td></td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通告审核</td>
+        <td>0</td>
+        <td>1</td>
+        <td>scheduleAudit</td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通告统计</td>
+        <td>0</td>
+        <td>1</td>
+        <td>scheduleStatistics</td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发布通告</td>
+        <td>0</td>
+        <td>1</td>
+        <td>scheduleAdd</td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>轮播图管理</td>
+        <td>0</td>
+        <td>1</td>
+        <td></td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通告区轮播图列表</td>
+        <td>0</td>
+        <td>1</td>
+        <td>bannerList</td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通告区轮播图添加</td>
+        <td>0</td>
+        <td>1</td>
+        <td>bannerAdd</td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;活动区轮播图列表</td>
+        <td>0</td>
+        <td>1</td>
+        <td>activityList</td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;活动区轮播图添加</td>
+        <td>0</td>
+        <td>1</td>
+        <td>activityAdd</td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>基础模块</td>
+        <td>0</td>
+        <td>1</td>
+        <td></td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;管理员管理</td>
+        <td>0</td>
+        <td>1</td>
+        <td>adminList</td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;角色管理</td>
+        <td>0</td>
+        <td>1</td>
+        <td>roleList</td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;目录管理</td>
+        <td>0</td>
+        <td>1</td>
+        <td>catalogList</td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;权限管理</td>
+        <td>0</td>
+        <td>1</td>
+        <td>privilegeList</td>
+        <td>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+            <button class="layui-btn layui-btn-small"><i class="layui-icon"></i></button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

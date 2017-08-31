@@ -44,7 +44,7 @@ $(function(){
 		background: "#141414",
 		color: "#E6E6E6"
 	});
-	$(".submit_btn").click(function(){
+	$(".submit_btn").on('click',function(){
 		var user=$('#user').val();
 		var pwd=$('#pwd').val();
 		$.ajax({
@@ -65,9 +65,15 @@ $(function(){
 				layer.msg('访问服务器失败');
 			}
 		});
+	});
+	$(function(){
+		document.onkeydown = function(e){
+			var ev = document.all ? window.event : e;
+			if(ev.keyCode==13) {
+				$('.submit_btn').click();
 
-
-
+			}
+		}
 	});
 });
 </script>
