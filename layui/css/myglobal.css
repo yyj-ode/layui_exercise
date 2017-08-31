@@ -98,3 +98,11 @@ img {
     width: 19px;
 }
 
+.red {
+    color:red;
+}
+
+.top{
+    vertical-align: top;
+}
+
