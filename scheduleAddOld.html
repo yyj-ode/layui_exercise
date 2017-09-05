@@ -10,7 +10,7 @@
 <body >
     <div class="box">
         <p class="boxpa">发布通告上传</p>
-        <form action="http://rest.yankushidai.com/index.php/Version1?c=my&a=schedule" method= "post" enctype ="multipart/form-data">
+        <form action="" method= "post" enctype ="multipart/form-data" id="form">
             <input type="hidden" name="user_id" value="1"/>
             <div class="Box_da">
                 <div class="form-group">
@@ -122,6 +122,7 @@
     <script src="dist/scripts/jquery-3.0.0.min.js"></script>
     <!--<script src="dist/scripts/config.js" charset="utf-8"></script>-->
     <!--<script src="dist/scripts/ajaxfileupload.js" charset="utf-8"></script>-->
+    <script type="text/javascript" src="conf/conf.js"></script>
     <script src="dist/scripts/PCASClass.js" charset="utf-8"></script>
     <script src="dist/scripts/YMDClass.js" charset="utf-8"></script>
     <script src="dist/scripts/index.js"></script>
@@ -139,6 +140,7 @@
     <script>
         <!--tab-->
         $(function(){
+            $("#form").attr('action',conf_host+"version1/my/schedule");
             $(".Tg_ul li").click(function(){
                $(this).addClass("ons").siblings().removeClass("ons");
                 var i = $(this).index();
