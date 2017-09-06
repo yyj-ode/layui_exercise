@@ -55,7 +55,7 @@ $(function(){
 			success:function(data){
 				var data_object = $.parseJSON( data );
 				if(data_object.status == 1){
-					$.cookie('user', data_object.user, { expires: 7, path: '/' });
+					$.cookie('user', user, { expires: 7, path: '/' });
 					location.href = "admin.html";
 				}else{
 					layer.msg('账号或密码错误');
