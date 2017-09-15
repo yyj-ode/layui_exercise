@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body>
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>添加用户</legend>
+</fieldset>
+
+<form class="layui-form" action="" enctype="multipart/form-data" method="post" id="form">
+    <div class="layui-form-item">
+        <label class="layui-form-label">手机号</label>
+        <div class="layui-input-inline">
+            <input type="text" name="mobile" placeholder="请输入手机号" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">密码</label>
+        <div class="layui-input-inline">
+            <input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">昵称</label>
+        <div class="layui-input-inline">
+            <input type="text" name="nickname" placeholder="请输入昵称" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">头像</label>
+        <div class="layui-input-inline" style="margin-top:5px;">
+            <input type="file" name="user_img" />
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">性别要求</label>
+        <div class="layui-input-inline">
+            <select name="sex" lay-filter="aihao" id="sex">
+                <option value="">性别</option>
+                <option value="0">保密</option>
+                <option value="1">男</option>
+                <option value="2">女</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">城市</label>
+        <div class="layui-input-inline">
+            <select name="province" id="province" lay-filter="province">
+                <option value="">请选择省份</option>
+                <option value="北京市">北京市</option>
+                <option value="上海市">上海市</option>
+                <option value="天津市">天津市</option>
+                <option value="重庆市">重庆市</option>
+                <option value="河北省">河北省</option>
+                <option value="山西省">山西省</option>
+                <option value="辽宁省">辽宁省</option>
+                <option value="吉林省">吉林省</option>
+                <option value="黑龙江省">黑龙江省</option>
+                <option value="江苏省">江苏省</option>
+                <option value="浙江省">浙江省</option>
+                <option value="安徽省">安徽省</option>
+                <option value="福建省">福建省</option>
+                <option value="江西省">江西省</option>
+                <option value="山东省">山东省</option>
+                <option value="河南省">河南省</option>
+                <option value="湖北省">湖北省</option>
+                <option value="湖南省">湖南省</option>
+                <option value="广东省">广东省</option>
+                <option value="海南省">海南省</option>
+                <option value="四川省">四川省</option>
+                <option value="贵州省">贵州省</option>
+                <option value="云南省">云南省</option>
+                <option value="陕西省">陕西省</option>
+                <option value="甘肃省">甘肃省</option>
+                <option value="青海省">青海省</option>
+                <option value="宁夏回族自治区">宁夏回族自治区</option>
+                <option value="新疆维吾尔族自治区">新疆维吾尔族自治区</option>
+                <option value="内蒙古自治区">内蒙古自治区</option>
+                <option value="广西壮族自治区">广西壮族自治区</option>
+                <option value="西藏自治区">西藏自治区</option>
+                <option value="香港">香港</option>
+                <option value="澳门">澳门</option>
+                <option value="台湾省">台湾省</option>
+                <option value="其他">其他</option>
+            </select>
+        </div>
+        <div class="layui-input-inline">
+            <select name="city" id="view">
+                <option value="">请选择城市</option>
+            </select>
+        </div>
+        <script id="demo" type="text/html">
+            {{#  layui.each(d, function(index, item){ }}
+            <option value="{{ item.city_name }}">{{ item.city_name }}</option>
+            {{#  }); }}
+        </script>
+    </div>
+
+    <button class="layui-btn" lay-submit lay-filter="formDemo" style="margin-left: 40px;">立即提交</button>
+</form>
+
+
+<script src="conf/conf.js"></script>
+<script src="dist/scripts/jquery-3.0.0.min.js"></script>
+<script src="layui/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['form','laydate','element','laytpl','layer'], function(){
+        var form = layui.form()
+                ,layer = layui.layer
+                ,element = layui.element()
+                ,laydate = layui.laydate
+                ,laytpl = layui.laytpl;
+        $("#form").attr('action',conf_host+"back2/user/add");
+        form.on('select(province)', function(data){
+            var province = data.value;
+            $.ajax({
+                type:'POST',
+                url:conf_host+"back2/cityback/getcity",
+                data:{province:province},
+                success:function(data){
+                    var getTpl = demo.innerHTML;
+                    var data_object = $.parseJSON( data );
+                    laytpl(getTpl).render(data_object, function(html){
+                        view.innerHTML = html;
+                        form.render();
+
+                    });
+                },
+                error:function(){
+                    layer.msg('访问服务器失败');
+                }
+            });
+        });
+
+    });
+</script>
+</body>
+</html>

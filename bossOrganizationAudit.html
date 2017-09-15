@@ -12,7 +12,7 @@
 <body>
 
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-    <legend>身份认证</legend>
+    <legend>机构boss认证</legend>
 </fieldset>
 
 <form class="layui-form layui-form-pane" action="javascript:;">
@@ -40,28 +40,28 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">证件类型</label>
+        <label class="layui-form-label">机构名称</label>
         <div class="layui-input-inline">
-            <input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input" value="身份证" disabled>
-        </div>
-    </div>
-    <div class="layui-form-item" style="float:left">
-        <label class="layui-form-label">身份证号</label>
-        <div class="layui-input-block">
-            <input type="text" name="identity" placeholder="" autocomplete="off" class="layui-input" disabled value="{{d.IDcard_number}}">
+            <input type="text" name="identity" placeholder="" autocomplete="off" class="layui-input" disabled value="{{d.organization}}">
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">手持证件照</label>
+        <label class="layui-form-label">机构简介</label>
+        <div class="layui-input-inline">
+            <input type="text" name="identity" placeholder="" autocomplete="off" class="layui-input" disabled value="{{d.organizatioSummary}}">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">机构地址</label>
+        <div class="layui-input-inline">
+            <input type="text" name="identity" placeholder="" autocomplete="off" class="layui-input" disabled value="{{d.organizationAddress}}">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">机构图片</label>
         <div class="layui-input-block">
 
-            <img src="{{d.user_positive}}" style="width:300px;" alt="">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">证件照背面</label>
-        <div class="layui-input-block">
-            <img src="{{d.user_back}}" style="width:300px;" alt="">
+            <img src="{{d.organizationImg}}" style="width:300px;" alt="">
         </div>
     </div>
     {{# if(d.status == '审核中'){ }}
@@ -98,15 +98,15 @@
         var $ = layui.jquery
                 ,laytpl = layui.laytpl;
         var url = window.location.href;
-        var id = url.substr(url.indexOf('id=')+3);
-//        获取身份认证详情数据
+        var boss_id = url.substr(url.indexOf('boss_id=')+8);
+//        alert(yanyi_id);
+//        获取个人boss认证详情数据
         $.ajax({
             type:"POST",
-            url:conf_host+"back2/identity/getDetail",
-            data:{id:id},
+            url:conf_host+"back2/boss/getOrganizationDetail",
+            data:{boss_id:boss_id},
             datatype:"json",
             success:function(data){
-
                 var getTpl = demo.innerHTML;
 //                alert(getTpl);
                 var data_object = $.parseJSON( data );
@@ -129,15 +129,15 @@
                                 ,reason= $('#reason').val();
                         $.ajax({
                             type:"POST",
-                            url:conf_host+"back2/identity/audit",
-                            data:{id:id,user_id:user_id,status:status,reason:reason},
+                            url:conf_host+"back2/boss/organizationAudit",
+                            data:{boss_id:boss_id,user_id:user_id,status:status,reason:reason},
                             datatype:"json",
                             success:function(data){
                                 var data_object = $.parseJSON( data );
                                 if(data_object.message == '审核成功'){
                                     layer.msg('审核成功,2秒后跳转至列表页');
                                     setTimeout(function () {
-                                        window.location.href = 'identity.html';
+                                        window.location.href = 'organization.html';
                                     }, 2000);
                                 }else{
                                     layer.msg('审核失败，请重新审核');
