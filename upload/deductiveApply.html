@@ -25,7 +25,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">标签</label>
         <div class="layui-input-block">
-            <input type="checkbox" name="type[0]" title="演员" checked="">
+            <input type="checkbox" name="type[0]" title="演员">
             <input type="checkbox" name="type[1]" title="模特">
             <input type="checkbox" name="type[2]" title="主播">
             <input type="checkbox" name="type[3]" title="校园艺人">
@@ -49,23 +49,32 @@
     </div>
     <input type="hidden" name="yanyi_img" id="yanyi_img">
     <input type="hidden" name="user_id" id="user_id">
+    <input type="hidden" name="admin_name" id="admin_name">
     <button class="layui-btn" lay-submit lay-filter="formDemo" style="margin-left: 40px;">立即提交</button>
 </form>
-
+<script src="../dist/scripts/jquery-3.0.0.min.js"></script>
 <script src="../conf/conf.js"></script>
 <script src="layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="../jqueryCookie/jquery.cookie.js"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
     layui.use(['form','laydate','element','laytpl','layer','upload'], function(){
 
-        var $ = layui.jquery
-                ,upload = layui.upload
+        var upload = layui.upload
                 ,form = layui.form
                 ,layer = layui.layer
                 ,element = layui.element
                 ,laydate = layui.laydate
                 ,laytpl = layui.laytpl;
-
+        var admin_name = $.cookie('user');
+//        alert(admin_name);
+        if(admin_name == undefined || admin_name == 'null'){
+            layer.msg('您尚未登录');
+            setTimeout(function () {
+                location.href = "index.html";
+            }, 2000);
+        }
+        $("#admin_name").val(admin_name);
         var url = window.location.href;
         var user_id = url.substr(url.indexOf('user_id=')+8);
         $('#user_id').val(user_id);

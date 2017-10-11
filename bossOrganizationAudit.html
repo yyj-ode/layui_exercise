@@ -90,13 +90,22 @@
 </script>
 
 
-
+<script src="dist/scripts/jquery-3.0.0.min.js"></script>
 <script src="conf/conf.js"></script>
 <script src="layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="jqueryCookie/jquery.cookie.js"></script>
 <script>
     layui.use(['layer','laytpl'], function(){
-        var $ = layui.jquery
-                ,laytpl = layui.laytpl;
+        var laytpl = layui.laytpl;
+        var admin_name = $.cookie('user');
+//        alert(admin_name);
+        if(admin_name == undefined || admin_name == 'null'){
+            layer.msg('您尚未登录');
+            setTimeout(function () {
+                location.href = "index.html";
+            }, 2000);
+        }
+//        $("#admin_name").val(admin_name);
         var url = window.location.href;
         var boss_id = url.substr(url.indexOf('boss_id=')+8);
 //        alert(yanyi_id);
@@ -130,7 +139,7 @@
                         $.ajax({
                             type:"POST",
                             url:conf_host+"back2/boss/organizationAudit",
-                            data:{boss_id:boss_id,user_id:user_id,status:status,reason:reason},
+                            data:{boss_id:boss_id,user_id:user_id,status:status,reason:reason,admin_name:admin_name},
                             datatype:"json",
                             success:function(data){
                                 var data_object = $.parseJSON( data );

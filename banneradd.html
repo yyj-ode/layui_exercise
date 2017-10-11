@@ -66,8 +66,10 @@
     <div id="demo7" style="position:absolute;bottom:1px;"></div>
 </div>
 <input type="hidden" id="user-tpl-demo-hidden">
+<script src="dist/scripts/jquery-3.0.0.min.js"></script>
 <script src="conf/conf.js"></script>
 <script src="layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="jqueryCookie/jquery.cookie.js"></script>
 
 <script>
     layui.use(['laydate','form','laypage','layer','laytpl','element'], function(){
@@ -76,9 +78,16 @@
         var laydate = layui.laydate
                 ,laypage = layui.laypage
                 ,layer = layui.layer
-                ,$ = layui.jquery
                 ,laytpl = layui.laytpl;
-
+        var admin_name = $.cookie('user');
+//        alert(admin_name);
+        if(admin_name == undefined || admin_name == 'null'){
+            layer.msg('您尚未登录');
+            setTimeout(function () {
+                location.href = "index.html";
+            }, 2000);
+        }
+//        $("#admin_name").val(admin_name);
         var start = {
             min: '1970-01-01'
             ,max: '2099-06-16 23:59:59'
@@ -137,7 +146,7 @@
                         //提交的网址
                         url:conf_host+"back2/banner/add",
                         //提交的数据
-                        data:{schedule_id:schedule_id},
+                        data:{schedule_id:schedule_id,admin_name:admin_name},
                         //返回数据的格式
                         datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
                         //成功返回之后调用的函数
