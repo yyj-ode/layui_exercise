@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>演库后台管理系统</title>
+	<title>演库后台管理系统3.0</title>
 	<meta name="renderer" content="webkit">	
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -46,7 +46,9 @@ $(function(){
 	});
 	$(".submit_btn").on('click',function(){
 		var user=$('#user').val();
+//		alert(user);
 		var pwd=$('#pwd').val();
+//		alert(pwd);
 		$.ajax({
 			type:"POST",
 			url:conf_host+"back2/login/dologin",
@@ -55,7 +57,9 @@ $(function(){
 			success:function(data){
 				var data_object = $.parseJSON( data );
 				if(data_object.status == 1){
-					$.cookie('user', user, { expires: 7, path: '/' });
+					//已确认问题，正式服务器，下列代码会失效，但是测试服可以过（这里是可以拿到这个user值的，但是cookie语句赋值不上）
+					$.cookie('user', data_object.user, { expires: 7, path: '/' });
+
 					location.href = "admin.html";
 				}else{
 					layer.msg('账号或密码错误');
