@@ -28,6 +28,9 @@
     <div style="float:left;margin-left:55px;">
         <button class="layui-btn" id="search-button">搜索</button>
     </div>
+    <div style="float:left;margin-left:11px;">
+        <button class="layui-btn" id="refresh">刷新</button>
+    </div>
 </div>
 <div class="layui-form">
     <table class="layui-table">
@@ -55,7 +58,7 @@
             <tr>
                 <td>{{ item.schedule_id }}</td>
                 <td>{{ item.schedule_title }}</td>
-                <td><img style="width: 222px;" src="{{ item.schedule_img }}" alt=""></td>
+                <td><img style="width: 222px;height:130px;" src="{{ item.schedule_img }}" alt=""></td>
                 <td><b><a href="javascript:;" style="color:#009688;" id="{{ item.schedule_id }}">轮播图上架</a></b></td>
             </tr>
             {{#  }); }}
@@ -251,6 +254,132 @@
                 url:conf_host+"back2/banner/getScheduleData",
                 //提交的数据
                 data:{page:1,rows:4,start_time:start_time,end_time:end_time,search_key:search_key},
+                //返回数据的格式
+                datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
+                //成功返回之后调用的函数
+                success:function(data){
+                    layer.msg('第 '+ 1 +' 页');
+                    var getTpl = demo_model;
+                    var data_object = $.parseJSON( data );
+                    laytpl(getTpl).render(data_object, function(html){
+                        view.innerHTML = html;
+                    });
+
+                    //        轮播图上架
+                    $("a").on('click',function(){
+                        var schedule_id = this.id;
+                        $.ajax({
+                            //提交数据的类型 POST GET
+                            type:"POST",
+                            //提交的网址
+                            url:conf_host+"back2/banner/add",
+                            //提交的数据
+                            data:{schedule_id:schedule_id},
+                            //返回数据的格式
+                            datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
+                            //成功返回之后调用的函数
+                            success:function(data){
+                                var data_object = $.parseJSON( data );
+                                if(data_object.status == '成功'){
+                                    layer.msg('轮播图上架成功，1秒后刷新页面');
+                                    setTimeout(function () {
+                                        window.location.reload();
+                                    }, 1000);
+                                }else{
+                                    layer.msg(data_object.reason);
+                                }
+                            },
+                            error:function(){
+                                lay.msg('轮播图上架失败');
+                            }
+                        });
+                    });
+
+//                    重新生成分页
+                    laypage({
+                        cont: 'demo7'
+                        ,pages:data_object.count
+                        ,groups: 5
+                        ,skip: true
+                        ,jump: function(obj, first){
+                            if(!first){
+                                var start_time = $('#LAY_demorange_s').val();
+                                var end_time = $('#LAY_demorange_e').val();
+                                var search_key = $('#search_key').val();
+                                $.ajax({
+                                    //提交数据的类型 POST GET
+                                    type:"POST",
+                                    //提交的网址
+                                    url:conf_host+"back2/banner/getScheduleData",
+                                    //提交的数据
+                                    data:{page:obj.curr,rows:4,start_time:start_time,end_time:end_time,search_key:search_key},
+                                    //返回数据的格式
+                                    datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
+                                    //成功返回之后调用的函数
+                                    success:function(data){
+                                        layer.msg('第 '+ obj.curr +' 页');
+                                        var getTpl = demo_model;
+                                        var data_object = $.parseJSON( data );
+                                        laytpl(getTpl).render(data_object, function(html){
+                                            view.innerHTML = html;
+                                        });
+                                        //        轮播图上架
+                                        $("a").on('click',function(){
+                                            var schedule_id = this.id;
+                                            $.ajax({
+                                                //提交数据的类型 POST GET
+                                                type:"POST",
+                                                //提交的网址
+                                                url:conf_host+"back2/banner/add",
+                                                //提交的数据
+                                                data:{schedule_id:schedule_id},
+                                                //返回数据的格式
+                                                datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
+                                                //成功返回之后调用的函数
+                                                success:function(data){
+                                                    var data_object = $.parseJSON( data );
+                                                    if(data_object.status == '成功'){
+                                                        layer.msg('轮播图上架成功，1秒后刷新页面');
+                                                        setTimeout(function () {
+                                                            window.location.reload();
+                                                        }, 1000);
+                                                    }else{
+                                                        layer.msg(data_object.reason);
+                                                    }
+                                                },
+                                                error:function(){
+                                                    lay.msg('轮播图上架失败');
+                                                }
+                                            });
+                                        });
+                                    },
+                                    error:function(){
+                                        alert('访问服务器失败');
+                                    }
+                                });
+                            }
+                        }
+                    });
+                },
+                error:function(){
+                    alert('访问服务器失败');
+                }
+            });
+
+        });
+
+        //        刷新，并生成分页
+        $('#refresh').on('click',function(){
+            $('#LAY_demorange_s').val('');
+            $('#LAY_demorange_e').val('');
+            $('#search_key').val('');
+            $.ajax({
+                //提交数据的类型 POST GET
+                type:"POST",
+                //提交的网址
+                url:conf_host+"back2/banner/getScheduleData",
+                //提交的数据
+                data:{page:1,rows:4},
                 //返回数据的格式
                 datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
                 //成功返回之后调用的函数

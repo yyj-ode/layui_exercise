@@ -17,6 +17,18 @@
 
 <form class="layui-form layui-form-pane" action="javascript:;">
 
+        <div class="layui-form-item" style="float: left;">
+            <label class="layui-form-label">用户群组</label>
+            <div class="layui-input-inline">
+                <select name="group" lay-filter="group" id="status">
+                    <option value="">请选择</option>
+                    <option value="1">全部用户</option>
+                    <option value="2">全部艺人(通过演绎认证的用户)</option>
+                    <option value="3">全部boss(通过boss用户的认证)</option>
+                </select>
+            </div>
+        </div>
+
         <div class="layui-form-item">
             <label class="layui-form-label">消息内容</label>
             <div class="layui-input-block">
@@ -50,11 +62,13 @@
 //        获取身份认证详情数据
         $('#submit').on('click',function(){
             var content = $('#content').val();
+            var group = $("select[name=group]").val();
 //            alert(content);
+//            alert(group);
             $.ajax({
                 type:"POST",
                 url:conf_host+"back2/user/sendMessageToAllUsers",
-                data:{content:content},
+                data:{content:content,group:group},
                 datatype:"json",
                 success:function(data){
 //                    alert(data);
@@ -62,7 +76,7 @@
                     if(data_object.status == '发送成功'){
                         layer.msg('发送成功');
                     }else{
-                        layer.msg('发送失败');
+                        layer.msg(data_object.status);
                     }
 
                 },

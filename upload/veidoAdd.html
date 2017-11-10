@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body>
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>添加综艺</legend>
+</fieldset>
+
+<form class="layui-form" action="javascript:;" id="form">
+	<select id="select">
+			<option value="-1">-请选择角色-</option>
+			<option>曹姬</option>
+			<option>夏淳</option>
+			<option>左慈</option>
+			<option>张帆</option>
+			<option>洛苾</option>
+			<option>姜尚</option>
+			<option>刘备</option>
+		</select>
+    <div class="layui-form-item">
+        <label class="layui-form-label">上传视频</label>
+        <div class="layui-input-block">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">请在提示上传成功之后，再进行其他操作。视频格式只支持.mp4，请先转码再上传。  </li>
+                    <!--<li>多集综艺</li>-->
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show" id="singleVidel">
+                        <!--<button type="button" class="layui-btn" id="test5"><i class="layui-icon"></i>选择文件</button>-->
+                        <input type="file" id="file" />
+
+                    </div>
+                    <!--<div class="layui-tab-item"  id="multiVidel">-->
+                        <!--<div class="layui-upload">-->
+                            <!--<button type="button" class="layui-btn layui-btn-normal" id="testList"><i class="layui-icon"></i>选择视频文件</button>-->
+                            <!--<div class="layui-upload-list">-->
+                                <!--<table class="layui-table">-->
+                                    <!--<thead>-->
+                                    <!--<tr><th>文件名</th>-->
+                                        <!--<th>大小</th>-->
+                                        <!--<th>状态</th>-->
+                                        <!--<th>操作</th>-->
+                                    <!--</tr></thead>-->
+                                    <!--<tbody id="demoList"></tbody>-->
+                                <!--</table>-->
+                            <!--</div>-->
+                            <!--<button type="button" class="layui-btn" id="testListAction">开始上传</button>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item" id="actor">
+    </div>
+	
+    <script id="demo" type="text/html">
+        <div>
+            <div>
+                <label class="layui-form-label">参加艺人</label>
+                <div class="layui-input-inline">
+                    <select name="uid[]" lay-filter="aihao1" lay-search>
+                        <option value="">请输昵称,快速选择艺人</option>
+                        {{#  layui.each(d, function(index, item){ }}
+                            <option value="{{ item.user_id }}">{{ item.nickname }}</option>
+                        {{#  }); }}
+                    </select>
+                </div>
+                <button class="layui-btn layui-btn-danger actorReset" style="margin-left: 40px;">重置艺人</button>
+            </div>
+            <br>
+        </div>
+    </script>
+    <script id="demo2" type="text/html">
+        <div>
+            <div>
+                <label class="layui-form-label"></label>
+                <div class="layui-input-inline" >
+                    <select name="uid[]" lay-filter="aihao" lay-search>
+                        <option value="">请输昵称,快速选择艺人</option>
+                        {{#  layui.each(d, function(index, item){ }}
+                        <option value="{{ item.user_id }}">{{ item.nickname }}</option>
+                        {{#  }); }}
+                    </select>
+                </div>
+                <button class="layui-btn layui-btn-danger actorDel" style="margin-left: 40px;">删除</button>
+            </div>
+            <br>
+        </div>
+        
+    </script>
+
+</form>
+<div class="layui-form-item">
+    <button class="layui-btn layui-btn-normal" style="margin-left: 40px;" id="actorAdd">添加艺人</button>
+</div>
+
+<button class="layui-btn" style="margin-left: 40px;" id="submit">立即提交</button>
+<script src="../conf/conf.js"></script>
+<script src="../dist/scripts/jquery-3.0.0.min.js"></script>
+<script src="layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="../jqueryCookie/jquery.cookie.js"></script>
+<script src="http://gosspublic.alicdn.com/aliyun-oss-sdk-4.3.0.min.js"></script>
+<script>
+    layui.use(['form','laydate','element','laytpl','layer','upload'], function(){
+        var form = layui.form
+                ,laytpl = layui.laytpl
+                ,upload = layui.upload;
+        var actorList;
+        var files;
+        var video_img;
+        var episode_src = [];
+        var episode_num = 0;
+        var video_upload = 0;
+        var index =null;
+        var roter =null;
+        //加载艺人数据
+        function actorInit(){
+            $.ajax({
+                type:'GET',
+                url:conf_host+"back2/actor/getactorlist",
+                success:function(data){
+                    var getTpl = demo.innerHTML		
+                            ,actor = document.getElementById('actor');
+                    actorList = $.parseJSON( data );
+                    console.log(actorList[2])
+                    laytpl(getTpl).render(actorList, function(html){
+                        actor.innerHTML = html;
+                        form.render('select');
+                       
+                    });
+                },
+                error:function(){
+                    layer.msg('访问服务器失败');
+                }
+            });
+        }
+        function actorAdd(){
+            var getTpl = demo2.innerHTML
+                    ,actor = document.getElementById('actor');
+            laytpl(getTpl).render(actorList, function(html){
+                var len = $("select").length;
+                var select = [];
+//                    alert(len);
+                for(var i=0;i<len;i++){
+                    select[i] = $("select"+":eq("+i+")").val();
+//                    alert(select[i]);
+                }
+                actor.innerHTML += html;
+                for(var j=0;j<len;j++){
+                    $("select:eq("+j+")").val(select[j]);
+                }
+                form.render('select');
+            });
+        }
+        actorInit();
+        //添加艺人
+        $('#actorAdd').on('click',function(){
+            layer.msg('添加艺人');
+            actorAdd();
+        });
+        $(document).on('click', '.actorDel', function() {
+            layer.msg('删除艺人');
+            $(this).parent().parent().remove();
+        });
+        //重置艺人
+        $(document).on('click', '.actorReset', function() {
+            layer.msg('重置艺人');
+            actorInit();
+        });
+
+        //表单提交
+        $('#submit').on('click',function(){
+        	var myselect=document.getElementById('select');
+				index=myselect.selectedIndex-1;
+				console.log(index);
+				console.log(roter);
+            if(video_upload != 1){
+                layer.msg('视频未上传成功，无法提交');
+                return;
+            }else if(index ==-1){
+            	layer.msg('人物未选择');
+            	return;
+            }
+            var len = $("select").length;
+            console.log(len);
+            var uids = [];//所有参与的演员的id，是个数组
+//                    alert(len);
+            //获取到所有select的值，即获取到所有演员的id
+            for(var i=0;i<len;i++){
+                uids[i] = $("select"+":eq("+i+")").val();
+				
+            }
+            console.log(uids)
+            var title = $('#title').val();
+            var introduce = $('#introduce').val();
+            var sort_introduce = $('#sort_introduce').val();
+		console.log(roter);
+ 		
+ 		$.ajax({
+                type:'POST',
+                url:"http://api.yankushidai.com/web/index/change_user",
+               data:{'user_id':uids[1],'role_id':index,'video_src':roter},
+                success:function(data){
+                	console.log(data);
+
+                },
+                error:function(){
+                    layer.msg('上传失败未选择角色');
+                }
+
+            });
+
+        });
+        var uploadInst = upload.render({
+            elem: '#test1'
+            ,url: conf_host+'Back2/Variety/videoImgUpload'
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+            }
+            ,done: function(res){
+                //如果上传失败
+                if(res.code > 0){
+                    return layer.msg('上传失败');
+                }else{ //上传成功
+                    layer.msg('综艺封面上传成功');
+                    video_img = res.data.src;
+//                    alert(video_img);
+                }
+            }
+            ,error: function(){
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function(){
+                    uploadInst.upload();
+                });
+            }
+        });
+        
+ document.getElementById('file').addEventListener('change', function (e) {
+            video_upload = 0;
+            var file = e.target.files[0];
+            //判断文件后缀名
+            var upFileName = $("#file").val();
+            var index1=upFileName.lastIndexOf(".");
+            var index2=upFileName.length;
+            var suffix=upFileName.substring(index1+1,index2);
+           
+			
+			
+                
+            if(suffix != 'mp4'){
+                layer.msg('目前只支持MP4格式');
+                return;		
+            }
+            var timestamp = Date.parse(new Date());
+            var storeAs = 'UserVideo/'+timestamp+'.mp4';
+            var client = new OSS.Wrapper({
+                accessKeyId:"LTAIysus6HEVSHMJ",
+                accessKeySecret:"0R9uNt346k4tLFe3HPPqULxVC7qeqd",
+                endpoint: 'oss-cn-qingdao.aliyuncs.com',
+                bucket: 'yanku'
+            });
+            client.multipartUpload(storeAs, file).then(function (result) {
+            
+                video_upload = 1;
+                if(video_upload ==1){
+                	 layer.msg('视频上传成功')
+                }
+                episode_src[0] = result.name;
+               	roter =result.name;
+				
+            }).catch(function (err) {
+                console.log(err);
+            });
+        });
+        //视频上传阿里云OSS
+       
+
+//        upload.render({
+//            elem: '#test5'
+//            ,url: conf_host+'Back2/Variety/episodeUpload'
+//            ,accept: 'video' //视频
+//            ,before: function(){
+//                //预读本地文件示例，不支持ie8
+//                $("#multiVidel").html('该综艺已经定义为单集综艺，无法进行多集综艺相关操作');
+//                layer.msg('请等待视频上传成功后，再进行表单提交');
+//            }
+//            ,done: function(res){
+//                layer.msg('视频上传成功');
+//                console.log(res)
+//                episode_src[0] = res.data.src;
+////                alert(episode_src[0]);
+//            }
+//        });
+        //多文件列表示例
+//        var demoListView = $('#demoList')
+//                ,uploadListIns = upload.render({
+//            elem: '#testList'
+//            ,url: conf_host+'Back2/Variety/episodeUpload'
+//            ,accept: 'video'
+//            ,multiple: true
+//            ,auto: false
+//            ,bindAction: '#testListAction'
+//            ,choose: function(obj){
+//                $("#singleVidel").html('该综艺已经定义为多集综艺，无法进行单集综艺相关操作');
+//
+//                files = obj.pushFile(); //将每次选择的文件追加到文件队列
+//                //读取本地文件
+//                obj.preview(function(index, file, result){
+//                    var tr = $(['<tr id="upload-'+ index +'">'
+//                        ,'<td>'+ file.name +'</td>'
+//                        ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
+//                        ,'<td>等待上传</td>'
+//                        ,'<td>'
+//                        ,'<button class="layui-btn layui-btn-mini demo-reload layui-hide">重传</button>'
+//                        ,'<button class="layui-btn layui-btn-mini layui-btn-danger demo-delete">删除</button>'
+//                        ,'</td>'
+//                        ,'</tr>'].join(''));
+//
+//                    //单个重传
+//                    tr.find('.demo-reload').on('click', function(){
+//                        obj.upload(index, file);
+//                    });
+//
+//                    //删除
+//                    tr.find('.demo-delete').on('click', function(){
+//                        delete files[index]; //删除对应的文件
+//                        tr.remove();
+//                    });
+//
+//                    demoListView.append(tr);
+//                });
+//            }
+//            ,before: function(){
+//                //预读本地文件示例，不支持ie8
+//                layer.msg('开始上传：若视频较大，请耐心等待');
+//            }
+//            ,done: function(res, index, upload){
+//                if(res.code == 0){ //上传成功
+//                    var tr = demoListView.find('tr#upload-'+ index)
+//                            ,tds = tr.children();
+//                    tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+//                    tds.eq(3).html(''); //清空操作
+//                    delete files[index]; //删除文件队列已经上传成功的文件
+//                    episode_src[episode_num] = res.data.src;
+////                    alert(episode_src[episode_num]);
+//                    episode_num++;
+//
+//                    return;
+//                }
+//                this.error(index, upload);
+//            }
+//            ,error: function(index, upload){
+//                var tr = demoListView.find('tr#upload-'+ index)
+//                        ,tds = tr.children();
+//                tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+//                tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
+//            }
+//        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>通告编辑</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+</head>
+<body>
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>通告编辑</legend>
+</fieldset>
+
+<form class="layui-form layui-form-pane" action="javascript:;">
+    <div id="view" class="layui-form"></div>
+</form>
+
+<script id="demo" type="text/html">
+
+    <div class="layui-form-item" id="if_re_pic">
+        <label class="layui-form-label">修改通告图?</label>
+        <div class="layui-input-block">
+            <button class="layui-btn" id="re_pic">改</button>
+        </div>
+    </div>
+    <div class="layui-form-item" id="pic1">
+        <label class="layui-form-label">通告图片</label>
+        <div class="layui-input-block">
+            <img src="{{d.schedule_img}}" style="width:300px;" alt="">
+        </div>
+    </div>
+
+    <div class="layui-form-item" id="pic2" style="display:none;">
+        <label class="layui-form-label">图片背景</label>
+        <div class="layui-input-inline">
+            <select name="background" lay-filter="aihao" id="back">
+                <option value="">请选择背景</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item" id="pic3" style="display:none;">
+        <label class="layui-form-label">图片文字</label>
+        <div class="layui-input-block">
+            <input type="text" name="text" placeholder="最多16个字" autocomplete="off" class="layui-input" value="" id="text">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">通告标题</label>
+        <div class="layui-input-block">
+            <input type="text" placeholder="请输入" autocomplete="off" class="layui-input" value="{{d.schedule_title}}" name="schedule_title" id="schedule_title">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">工作城市</label>
+        <div class="layui-input-inline">
+            <select name="province" id="province" lay-filter="province">
+                <option value="">选择省份（不改不用选）</option>
+                <option value="北京市">北京市</option>
+                <option value="上海市">上海市</option>
+                <option value="天津市">天津市</option>
+                <option value="重庆市">重庆市</option>
+                <option value="河北省">河北省</option>
+                <option value="山西省">山西省</option>
+                <option value="辽宁省">辽宁省</option>
+                <option value="吉林省">吉林省</option>
+                <option value="黑龙江省">黑龙江省</option>
+                <option value="江苏省">江苏省</option>
+                <option value="浙江省">浙江省</option>
+                <option value="安徽省">安徽省</option>
+                <option value="福建省">福建省</option>
+                <option value="江西省">江西省</option>
+                <option value="山东省">山东省</option>
+                <option value="河南省">河南省</option>
+                <option value="湖北省">湖北省</option>
+                <option value="湖南省">湖南省</option>
+                <option value="广东省">广东省</option>
+                <option value="海南省">海南省</option>
+                <option value="四川省">四川省</option>
+                <option value="贵州省">贵州省</option>
+                <option value="云南省">云南省</option>
+                <option value="陕西省">陕西省</option>
+                <option value="甘肃省">甘肃省</option>
+                <option value="青海省">青海省</option>
+                <option value="宁夏回族自治区">宁夏回族自治区</option>
+                <option value="新疆维吾尔族自治区">新疆维吾尔族自治区</option>
+                <option value="内蒙古自治区">内蒙古自治区</option>
+                <option value="广西壮族自治区">广西壮族自治区</option>
+                <option value="西藏自治区">西藏自治区</option>
+                <option value="香港">香港</option>
+                <option value="澳门">澳门</option>
+                <option value="台湾省">台湾省</option>
+                <option value="其他">其他</option>
+            </select>
+        </div>
+        <div class="layui-input-inline">
+            <select name="city" id="cityview">
+                <option value="{{d.city_name}}" selected="selected">{{d.city_name}}</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">性别需求</label>
+        <div class="layui-input-inline">
+            <select name="sex" lay-filter="aihao" id="sex">
+                <option value="">性别</option>
+                {{# if(d.sex == 0){ }}
+                <option value="0" selected="">不限</option>
+                {{# }else{ }}
+                <option value="0" >不限</option>
+                {{# } }}
+                {{# if(d.sex == 1){ }}
+                    <option value="1" selected="">男</option>
+                {{# }else{ }}
+                    <option value="1" >男</option>
+                {{# } }}
+                {{# if(d.sex == 2){ }}
+                <option value="2" selected="">女</option>
+                {{# }else{ }}
+                <option value="2" >女</option>
+                {{# } }}
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item" style="float:left">
+        <label class="layui-form-label">通告类型</label>
+        <div class="layui-input-inline">
+            <select name="schedule_type" lay-filter="aihao" id="type">
+                <option value="">通告类型</option>
+                {{# if(d.schedule_type == 0){ }}
+                <option value="0" selected="">影视通告</option>
+                {{# }else{ }}
+                <option value="0" >影视通告</option>
+                {{# } }}
+                {{# if(d.schedule_type == 1){ }}
+                <option value="1" selected="">模特招募</option>
+                {{# }else{ }}
+                <option value="1" >模特招募</option>
+                {{# } }}
+                {{# if(d.schedule_type == 2){ }}
+                <option value="2" selected="">群众招募</option>
+                {{# }else{ }}
+                <option value="2" >群众招募</option>
+                {{# } }}
+                {{# if(d.schedule_type == 3){ }}
+                <option value="3" selected="">主播招募</option>
+                {{# }else{ }}
+                <option value="3" >主播招募</option>
+                {{# } }}
+                {{# if(d.schedule_type == 4){ }}
+                <option value="4" selected="">主持招募</option>
+                {{# }else{ }}
+                <option value="4" >主持招募</option>
+                {{# } }}
+                {{# if(d.schedule_type == 5){ }}
+                <option value="5" selected="">歌手招募</option>
+                {{# }else{ }}
+                <option value="5" >歌手招募</option>
+                {{# } }}
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item" style="float:left">
+        <label class="layui-form-label">截止日期</label>
+        <div class="layui-input-inline">
+            <input type="text" name="acttime" id="date" lay-verify="date" placeholder="请选择截止日期" autocomplete="off" class="layui-input" value="{{d.act_time}}">
+        </div>
+    </div>
+    <div class="layui-form-item" id="if_re_content">
+        <label class="layui-form-label">改通告内容?</label>
+        <div class="layui-input-block">
+            <button class="layui-btn" id="re_content">改</button>
+        </div>
+    </div>
+    <div class="layui-form-item" id="content1">
+        <label class="layui-form-label">通告内容</label>
+        <div class="layui-input-block">
+            {{# if(d.schedule_content.substr(0,1) != '<'){ }}
+            <p>{{d.schedule_content}}</p>
+            {{# }else{ }}
+            <img src="{{d.schedule_content.substr(5)}}" style="width:300px;" alt="">
+            {{# } }}
+        </div>
+    </div>
+    <div class="layui-form-item" id="content2" style="display:none;">
+        <label class="layui-form-label">通告内容</label>
+        <div class="layui-input-block">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">上传文本</li>
+                    <li>上传图片</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <textarea placeholder="请输入内容" class="layui-textarea" id="schedule_content" name="schedule_content"></textarea>
+                    </div>
+                    <div class="layui-tab-item">
+                        <div class="layui-upload">
+                            <button type="button" class="layui-btn" id="test1">上传图片</button>
+                            <div class="layui-upload-list">
+                                <img class="layui-upload-img" id="demo1">
+                                <p id="demoText"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item" style="margin-left:111px;">
+        <button class="layui-btn" id="submit">提交</button>
+    </div>
+
+
+    <input type="hidden" name="user_id" value="{{d.user_id}}" id="user_id">
+
+</script>
+
+<script id="citydemo" type="text/html">
+    {{#  layui.each(d, function(index, item){ }}
+    <option value="{{ item.city_name }}">{{ item.city_name }}</option>
+    {{#  }); }}
+</script>
+
+
+<script src="../dist/scripts/jquery-3.0.0.min.js"></script>
+<script src="../conf/conf.js"></script>
+<script src="layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="../jqueryCookie/jquery.cookie.js"></script>
+<script>
+    layui.use(['layer','laytpl'], function(){
+        var laytpl = layui.laytpl;
+        var admin_name = $.cookie('user');
+        var city = '';
+//        alert(admin_name);
+        if(admin_name == undefined || admin_name == 'null'){
+            layer.msg('您尚未登录');
+            setTimeout(function () {
+                location.href = "../index.html";
+            }, 2000);
+        }
+//        $("#admin_name").val(admin_name);
+        var url = window.location.href;
+        var schedule_id = url.substr(url.indexOf('schedule_id=')+12);
+//        获取身份认证详情数据
+        $.ajax({
+            type:"POST",
+            url:conf_host+"back2/schedule/scheduleEdit",
+            data:{schedule_id:schedule_id},
+            datatype:"json",
+            success:function(data){
+
+                var getTpl = demo.innerHTML;
+//                alert(getTpl);
+                var data_object = $.parseJSON( data );
+//                alert(data_object);
+
+//                渲染模板
+                laytpl(getTpl).render(data_object, function(html){
+                    view.innerHTML = html;
+                });
+
+//                给表单元素添加样式和功能
+                layui.use(['form','element','laydate','upload'],function(){
+                    //用户列表页待渲染的模板
+                    var form = layui.form
+                            ,laydate = layui.laydate
+                            ,layer = layui.layer
+                            ,$ = layui.jquery
+                            ,upload = layui.upload;
+
+                    var src = '';
+
+                    laydate.render({
+                        elem: '#date'
+                    });
+
+
+                    $('#re_pic').on('click',function(){
+                        $("#pic1").css("display","none");
+                        $("#if_re_pic").css("display","none");
+                        $("#pic2").css("display","block");
+                        $("#pic3").css("display","block");
+                    });
+
+                    $('#re_content').on('click',function(){
+                        $("#content1").css("display","none");
+                        $("#if_re_content").css("display","none");
+                        $("#content2").css("display","block");
+                    });
+
+                    form.on('select(province)', function(data){
+                        var province = data.value;
+//                        alert(province);
+
+                        $.ajax({
+                            type:'POST',
+                            url:conf_host+"back2/cityback/getcity",
+                            data:{province:province},
+                            success:function(data){
+                                var getTpl2 = citydemo.innerHTML;
+                                var data_object2 = $.parseJSON( data );
+                                laytpl(getTpl2).render(data_object2, function(html){
+                                    cityview.innerHTML = html;
+                                    form.render();
+
+                                });
+                            },
+                            error:function(){
+                                layer.msg('访问服务器失败');
+                            }
+                        });
+                    });
+
+                    var uploadInst = upload.render({
+                        elem: '#test1'
+                        ,url: conf_host+"back2/schedule/imgUpload"
+                        ,before: function(obj){
+                            //预读本地文件示例，不支持ie8
+                            obj.preview(function(index, file, result){
+                                $('#demo1').attr('src', result); //图片链接（base64）
+                            });
+                        }
+                        ,done: function(res){
+                            //如果上传失败
+                            if(res.code > 0){
+                                return layer.msg('上传失败');
+                            }
+                            //上传成功
+                            layer.msg('图片上传成功，别忘了点击‘提交’哦！');
+                            src = res.data.src;
+                        }
+                        ,error: function(){
+                            //演示失败状态，并实现重传
+                            var demoText = $('#demoText');
+                            demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                            demoText.find('.demo-reload').on('click', function(){
+                                uploadInst.upload();
+                            });
+                        }
+                    });
+
+
+
+                    $('#submit').on('click',function(){
+                        var user_id = $('#user_id').val();
+                        city = $("select[name=city]").val();
+                        var sex = $("select[name=sex]").val();
+                        var schedule_type =$("select[name=schedule_type]").val();
+                        var background =$("select[name=background]").val();
+                        var schedule_content = $('#schedule_content').val();
+                        var schedule_title = $('#schedule_title').val();
+                        var text = $('#text').val();
+//                        alert(schedule_content);
+//                        alert(schedule_id);alert(user_id);alert(admin_name);alert(schedule_content);alert(src);
+//                        alert(background);alert(text);alert(schedule_title);alert(city);alert(sex);alert(schedule_type);
+                        $.ajax({
+                            type:"POST",
+                            url:conf_host+"back2/schedule/scheduleUpdate",
+                            data:{schedule_id:schedule_id,user_id:user_id,admin_name:admin_name,schedule_content:schedule_content,src:src,background:background,text:text,schedule_title:schedule_title,city:city,sex:sex,schedule_type:schedule_type},
+                            datatype:"json",
+                            success:function(data){
+                                var data_object = $.parseJSON( data );
+                                if(data_object.message == '修改成功'){
+                                    layer.msg('修改成功,2秒后跳转至列表页');
+//                                    alert('修改成功,2秒后跳转至列表页');
+                                    setTimeout(function () {
+                                        window.location.href = '../scheduleaudit.html';
+                                    }, 2000);
+                                }else{
+                                    layer.msg(data_object.message);
+                                }
+                            },
+                            error:function(){
+                                layer.msg('访问服务器失败');
+                            }
+
+                        });
+                    });
+
+                })
+
+            },
+            error:function(){
+                alert('访问服务器失败');
+            }
+        });
+
+
+    });
+</script>
+
+</body>
+</html>

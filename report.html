@@ -54,13 +54,13 @@
             <th>举报记录id</th>
             <th>举报人id</th>
             <th>被举报人id</th>
-            <th>举报类型</th>
-            <th>举报原因</th>
-            <th>举报详解</th>
-            <th>阅读状态</th>
             <th>举报人昵称</th>
             <th>被举报人昵称</th>
-            <th>举报截图</th>
+            <th>举报类型</th>
+            <th>举报原因</th>
+            <!--<th>举报详解</th>-->
+            <th>阅读状态</th>
+            <!--<th>举报截图</th>-->
         </tr>
         </thead>
         <tbody id="view">
@@ -73,13 +73,13 @@
                 <td>{{ item.id }}</td>
                 <td>{{ item.report_id }}</td>
                 <td>{{ item.user_id }}</td>
-                <td>{{ item.report_type }}</td>
-                <td>{{ item.reason }}</td>
-                <td>{{ item.explain }}</td>
-                <td>{{ item.view }}</td>
                 <td>{{ item.report_nickname }}</td>
                 <td>{{ item.user_nickname }}</td>
-                <td>{{ item.report_imgs }}</td>
+                <td>{{ item.report_type }}</td>
+                <td>{{ item.reason }}</td>
+                <!--<td>{{ item.explain }}</td>-->
+                <td>{{ item.view }}</td>
+                <!--<td>{{ item.report_imgs }}</td>-->
             </tr>
             {{#  }); }}
         </script>

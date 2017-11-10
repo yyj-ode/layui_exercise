@@ -30,6 +30,9 @@
     <div style="float:left;margin-left:55px;">
         <button class="layui-btn" id="search-button">搜索</button>
     </div>
+    <div style="float:left;margin-left:11px;">
+        <button class="layui-btn" id="refresh">刷新</button>
+    </div>
 </div>
 <div class="layui-form">
     <table class="layui-table">
@@ -195,6 +198,72 @@
                 url:conf_host+"back2/schedule/statistics",
                 //提交的数据
                 data:{page:1,rows:12,start_time:start_time,end_time:end_time,search_key:search_key},
+                //返回数据的格式
+                datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
+                //成功返回之后调用的函数
+                success:function(data){
+                    layer.msg('第 '+ 1 +' 页');
+                    var getTpl = demo_model;
+                    var data_object = $.parseJSON( data );
+                    laytpl(getTpl).render(data_object, function(html){
+                        view.innerHTML = html;
+                    });
+//                    重新生成分页
+                    laypage({
+                        cont: 'demo7'
+                        ,pages:data_object.count
+                        ,groups: 5
+                        ,skip: true
+                        ,jump: function(obj, first){
+                            if(!first){
+                                var start_time = $('#LAY_demorange_s').val();
+                                var end_time = $('#LAY_demorange_e').val();
+                                var search_key = $('#search_key').val();
+                                $.ajax({
+                                    //提交数据的类型 POST GET
+                                    type:"POST",
+                                    //提交的网址
+                                    url:conf_host+"back2/schedule/statistics",
+                                    //提交的数据
+                                    data:{page:obj.curr,rows:12,start_time:start_time,end_time:end_time,search_key:search_key},
+                                    //返回数据的格式
+                                    datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
+                                    //成功返回之后调用的函数
+                                    success:function(data){
+                                        layer.msg('第 '+ obj.curr +' 页');
+                                        var getTpl = demo_model;
+                                        var data_object = $.parseJSON( data );
+                                        laytpl(getTpl).render(data_object, function(html){
+                                            view.innerHTML = html;
+                                        });
+                                    },
+                                    error:function(){
+                                        alert('访问服务器失败');
+                                    }
+                                });
+                            }
+                        }
+                    });
+                },
+                error:function(){
+                    alert('访问服务器失败');
+                }
+            });
+
+        });
+
+        //        刷新，并生成分页
+        $('#refresh').on('click',function(){
+            $('#LAY_demorange_s').val('');
+            $('#LAY_demorange_e').val('');
+            $('#search_key').val('');
+            $.ajax({
+                //提交数据的类型 POST GET
+                type:"POST",
+                //提交的网址
+                url:conf_host+"back2/schedule/statistics",
+                //提交的数据
+                data:{page:1,rows:12},
                 //返回数据的格式
                 datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
                 //成功返回之后调用的函数

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>通告审核</title>
     <link rel="stylesheet" href="layui/css/layui.css"  media="all">
     <link rel="stylesheet" href="layui/css/myglobal.css"  media="all">
 
@@ -41,6 +41,9 @@
     <div style="float:left;margin-left:55px;">
         <button class="layui-btn" id="search-button">搜索</button>
     </div>
+    <div style="float:left;margin-left:11px;">
+        <button class="layui-btn" id="refresh">刷新</button>
+    </div>
 </div>
 <table class="layui-table">
         <!--以下代码可以设定表格各个字段的宽度-->
@@ -74,7 +77,10 @@
                 <td>{{ item.createtime }}</td>
                 <td>{{ item.acttime }}</td>
                 <td>{{ item.status }}</td>
-                <td><b><a href="scheduleDetail.html?schedule_id={{ item.schedule_id }}" style="color:#009688;">去审核</a></b></td>
+                <td>
+                    <b><a href="scheduleDetail.html?schedule_id={{ item.schedule_id }}" style="color:#009688;">去审核</a></b>&nbsp;&nbsp;
+                    <b><a href="upload/scheduleEdit.html?schedule_id={{ item.schedule_id }}" style="color:#009688;">修改</a></b>&nbsp;&nbsp;
+                </td>
             </tr>
             {{#  }); }}
         </script>
@@ -212,6 +218,74 @@
                 url:conf_host+"back2/schedule/audit",
                 //提交的数据
                 data:{page:1,rows:12,start_time:start_time,end_time:end_time,search_key:search_key,status:status},
+                //返回数据的格式
+                datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
+                //成功返回之后调用的函数
+                success:function(data){
+                    layer.msg('第 '+ 1 +' 页');
+                    var getTpl = demo_model;
+                    var data_object = $.parseJSON( data );
+                    laytpl(getTpl).render(data_object, function(html){
+                        view.innerHTML = html;
+                    });
+//                    重新生成分页
+                    laypage({
+                        cont: 'demo7'
+                        ,pages:data_object.count
+                        ,groups: 5
+                        ,skip: true
+                        ,jump: function(obj, first){
+                            if(!first){
+                                var start_time = $('#LAY_demorange_s').val();
+                                var end_time = $('#LAY_demorange_e').val();
+                                var search_key = $('#search_key').val();
+                                var status = $('#status').val();
+                                $.ajax({
+                                    //提交数据的类型 POST GET
+                                    type:"POST",
+                                    //提交的网址
+                                    url:conf_host+"back2/schedule/audit",
+                                    //提交的数据
+                                    data:{page:obj.curr,rows:12,start_time:start_time,end_time:end_time,search_key:search_key,status:status},
+                                    //返回数据的格式
+                                    datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
+                                    //成功返回之后调用的函数
+                                    success:function(data){
+                                        layer.msg('第 '+ obj.curr +' 页');
+                                        var getTpl = demo_model;
+                                        var data_object = $.parseJSON( data );
+                                        laytpl(getTpl).render(data_object, function(html){
+                                            view.innerHTML = html;
+                                        });
+                                    },
+                                    error:function(){
+                                        alert('访问服务器失败');
+                                    }
+                                });
+                            }
+                        }
+                    });
+                },
+                error:function(){
+                    alert('访问服务器失败');
+                }
+            });
+
+        });
+
+        //        刷新，并生成分页
+        $('#refresh').on('click',function(){
+            $('#LAY_demorange_s').val('');
+            $('#LAY_demorange_e').val('');
+            $('#search_key').val('');
+            $('#status').val('');
+            $.ajax({
+                //提交数据的类型 POST GET
+                type:"POST",
+                //提交的网址
+                url:conf_host+"back2/schedule/audit",
+                //提交的数据
+                data:{page:1,rows:12},
                 //返回数据的格式
                 datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
                 //成功返回之后调用的函数

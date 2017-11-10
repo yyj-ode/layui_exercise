@@ -8,96 +8,70 @@
 
 </head>
 <body>
+<div class="layui-form-pane" style="margin-top: 15px;">
+    <div class="layui-form-item" style="float: left;display:none;">
+        <label class="layui-form-label">注册时间&nbsp;&nbsp;:&nbsp;&nbsp;</label>
+        <div class="layui-input-inline">
+            <input class="layui-input" placeholder="开始日" id="LAY_demorange_s">
+        </div>
+        <div class="layui-input-inline">
+            <input class="layui-input" placeholder="截止日" id="LAY_demorange_e">
+        </div>
+    </div>
+    <div class="layui-form-item" style="float:left;display:none;">
+        <label class="layui-form-label">关键字</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="综艺名称" class="layui-input search-key" id="search_key">
+
+        </div>
+    </div>
+    <div style="float:left;margin-left:55px;;display:none;">
+        <button class="layui-btn" id="search-button">搜索</button>
+    </div>
+    <div class="layui-form-item" style="float:left;margin-left:11px;">
+        <button class="layui-btn" id="refresh">刷新</button>
+    </div>
+</div>
 <div class="layui-form">
-    <div class="layui-form-pane" style="margin-top: 15px;">
-        <div class="layui-form-item" style="float: left;">
-            <label class="layui-form-label">用户状态</label>
-            <div class="layui-input-inline">
-                <select name="interest" lay-filter="aihao" id="status">
-                    <option value="0,1">全部</option>
-                    <option value="0">正常</option>
-                    <option value="1">拉黑</option>
-                </select>
-            </div>
-        </div>
-        <div style="float: left;">
-            <label class="layui-form-label">注册时间&nbsp;&nbsp;:&nbsp;&nbsp;</label>
-            <div class="layui-input-inline">
-                <input class="layui-input" placeholder="开始日" id="LAY_demorange_s">
-            </div>
-            <div class="layui-input-inline">
-                <input class="layui-input" placeholder="截止日" id="LAY_demorange_e">
-            </div>
-        </div>
-        <div style="float:left">
-            <label class="layui-form-label">关键字</label>
-            <div class="layui-input-block">
-                <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="用户id/昵称/真实姓名/手机号" class="layui-input search-key" id="search_key">
+    <table class="layui-table">
+        <!--以下代码可以设定表格各个字段的宽度-->
+        <!--<colgroup>-->
+            <!--<col width="150">-->
+            <!--<col width="150">-->
+            <!--<col width="200">-->
+            <!--<col>-->
+        <!--</colgroup>-->
+        <thead>
+            <tr style="background:#393D49;color:#fff;">
+                <th>用户id</th>
+                <th>昵称</th>
+                <th>电话</th>
+                <th>反馈内容</th>
+                <th>反馈时间</th>
+                <th>操作</th>
 
-            </div>
-        </div>
-        <div style="float:left;margin-left:55px;">
-            <button class="layui-btn" id="search-button">搜索</button>
-        </div>
-        <div style="float:left;margin-left:11px;">
-            <button class="layui-btn" id="refresh">刷新</button>
-        </div>
-    </div>
-    <div class="layui-form">
-        <table class="layui-table">
-            <!--以下代码可以设定表格各个字段的宽度-->
-            <!--<colgroup>-->
-                <!--<col width="150">-->
-                <!--<col width="150">-->
-                <!--<col width="200">-->
-                <!--<col>-->
-            <!--</colgroup>-->
-            <thead>
-                <tr style="background:#393D49;color:#fff;">
-                    <th>用户ID</th>
-                    <th>真实姓名</th>
-                    <th>昵称</th>
-                    <th>头像</th>
-                    <th>余额</th>
-                    <th>累计消费</th>
-                    <th>注册时间</th>
-                    <th>最后登录时间</th>
-                    <th>最后登录IP</th>
-                    <th>用户状态</th>
-                    <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="view">
+
+            <!--待渲染的模板-->
+            <!--注意各个页面模板的id，因为这些页面最终将显示在同一个页面的选项卡里，id相同会冲突-->
+            <script id="demo" type="text/html">
+                {{#  layui.each(d.list, function(index, item){ }}
+                <tr>
+                    <td>{{ item.user_id }}</td>
+                    <td>{{ item.nickname }}</td>
+                    <td>{{ item.mobile }}</td>
+                    <td>{{ item.suggestion }}</td>
+                    <td>{{ item.createtime }}</td>
+                    <td><button class="layui-btn layui-btn-normal" id="{{ item.user_id }}">回复</button></td>
                 </tr>
-                </thead>
-                <tbody id="view">
-
-                <!--待渲染的模板-->
-                <!--注意各个页面模板的id，因为这些页面最终将显示在同一个页面的选项卡里，id相同会冲突-->
-                <script id="demo" type="text/html">
-                    {{#  layui.each(d.list, function(index, item){ }}
-                    <tr id="{{ item.user_id }}">
-                        <td>{{ item.user_id }}</td>
-                        <td>{{ item.realname }}</td>
-                        <td>{{ item.nickname }}</td>
-                        <td><img src="{{ item.user_img }}" alt="" class="small-user-jpg"></td>
-                        <td>{{ item.kubi }}</td>
-                        <td>{{ item.total_price }}</td>
-                        <td>{{ item.registertime }}</td>
-                        <td>{{ item.lasttime }}</td>
-                        <td>{{ item.lastip }}</td>
-                        <td>{{ item.status }}</td>
-                        <td><b>
-                            <a href="userImgAudit.html?user_id={{ item.user_id }}" style="color:#009688;">审核头像</a>&nbsp;&nbsp;
-                            <a href="upload/deductiveApply.html?user_id={{ item.user_id }}" style="color:#009688;">申请演绎认证</a>&nbsp;&nbsp;
-                            <a href="javascript:;" class="lahei" style="color:#009688;">拉黑</a>&nbsp;&nbsp;
-                            <a href="javascript:;" class="quxiaolahei" style="color:#009688;">取消拉黑</a>&nbsp;&nbsp;
-                        </b></td>
-                    </tr>
-                    {{#  }); }}
-                </script>
-                <!--<div id="view"></div>-->
-            </tbody>
-        </table>
-        <div id="demo7" style="position:absolute;bottom:1px;"></div>
-    </div>
+                {{#  }); }}
+            </script>
+            <!--<div id="view"></div>-->
+        </tbody>
+    </table>
+    <div id="demo7" style="position:absolute;bottom:1px;"></div>
 </div>
 <input type="hidden" id="user-tpl-demo-hidden">
 <script src="conf/conf.js"></script>
@@ -111,7 +85,6 @@
             ,laypage = layui.laypage
             ,layer = layui.layer
             ,$ = layui.jquery
-                ,form = layui.form()
             ,laytpl = layui.laytpl;
 
         var start = {
@@ -133,6 +106,12 @@
             }
         };
 
+        //回复反馈
+        $(document).on('click','.layui-btn-normal',function(){
+            var user_id = $(this).attr('id');
+//            layer.msg(user_id);
+            layer.msg('开发中');
+        });
 
         document.getElementById('LAY_demorange_s').onclick = function(){
             start.elem = this;
@@ -149,7 +128,7 @@
             //提交数据的类型 POST GET
             type:"POST",
             //提交的网址
-            url:conf_host+"back2/user/index",
+            url:conf_host+"back2/Suggest/index",
             //提交的数据
             data:{page:1,rows:12},
             //返回数据的格式
@@ -174,15 +153,14 @@
                             var start_time = $('#LAY_demorange_s').val();
                             var end_time = $('#LAY_demorange_e').val();
                             var search_key = $('#search_key').val();
-                            var status = $('#status').val();
 //                    layer.msg('第 '+ obj.curr +' 页');
                             $.ajax({
                                 //提交数据的类型 POST GET
                                 type:"POST",
                                 //提交的网址
-                                url:conf_host+"back2/user/index",
+                                url:conf_host+"back2/Suggest/index",
                                 //提交的数据
-                                data:{page:obj.curr,rows:12,start_time:start_time,end_time:end_time,search_key:search_key,status:status},
+                                data:{page:obj.curr,rows:12,start_time:start_time,end_time:end_time,search_key:search_key},
                                 //返回数据的格式
                                 datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
                                 //成功返回之后调用的函数
@@ -212,14 +190,13 @@
             var start_time = $('#LAY_demorange_s').val();
             var end_time = $('#LAY_demorange_e').val();
             var search_key = $('#search_key').val();
-            var status = $('#status').val();
             $.ajax({
                 //提交数据的类型 POST GET
                 type:"POST",
                 //提交的网址
-                url:conf_host+"back2/user/index",
+                url:conf_host+"back2/Suggest/index",
                 //提交的数据
-                data:{page:1,rows:12,start_time:start_time,end_time:end_time,search_key:search_key,status:status},
+                data:{page:1,rows:12,start_time:start_time,end_time:end_time,search_key:search_key},
                 //返回数据的格式
                 datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
                 //成功返回之后调用的函数
@@ -241,14 +218,13 @@
                                 var start_time = $('#LAY_demorange_s').val();
                                 var end_time = $('#LAY_demorange_e').val();
                                 var search_key = $('#search_key').val();
-                                var status = $('#status').val();
                                 $.ajax({
                                     //提交数据的类型 POST GET
                                     type:"POST",
                                     //提交的网址
-                                    url:conf_host+"back2/user/index",
+                                    url:conf_host+"back2/Suggest/index",
                                     //提交的数据
-                                    data:{page:obj.curr,rows:12,start_time:start_time,end_time:end_time,search_key:search_key,status:status},
+                                    data:{page:obj.curr,rows:12,start_time:start_time,end_time:end_time,search_key:search_key},
                                     //返回数据的格式
                                     datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
                                     //成功返回之后调用的函数
@@ -293,13 +269,11 @@
             $('#LAY_demorange_s').val('');
             $('#LAY_demorange_e').val('');
             $('#search_key').val('');
-            $('select').val('0,1');
-            form.render('select');
             $.ajax({
                 //提交数据的类型 POST GET
                 type:"POST",
                 //提交的网址
-                url:conf_host+"back2/user/index",
+                url:conf_host+"back2/Suggest/index",
                 //提交的数据
                 data:{page:1,rows:12},
                 //返回数据的格式
@@ -323,14 +297,13 @@
                                 var start_time = $('#LAY_demorange_s').val();
                                 var end_time = $('#LAY_demorange_e').val();
                                 var search_key = $('#search_key').val();
-                                var status = $('#status').val();
                                 $.ajax({
                                     //提交数据的类型 POST GET
                                     type:"POST",
                                     //提交的网址
-                                    url:conf_host+"back2/user/index",
+                                    url:conf_host+"back2/Suggest/index",
                                     //提交的数据
-                                    data:{page:obj.curr,rows:12,start_time:start_time,end_time:end_time,search_key:search_key,status:status},
+                                    data:{page:obj.curr,rows:12,start_time:start_time,end_time:end_time,search_key:search_key},
                                     //返回数据的格式
                                     datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
                                     //成功返回之后调用的函数
@@ -352,53 +325,6 @@
                 },
                 error:function(){
                     alert('访问服务器失败');
-                }
-            });
-        });
-
-        //拉黑
-        $(document).on("click",".lahei",function(){
-            var user_id = $(this).parent().parent().parent().attr('id');
-//            layer.msg(user_id);
-            $.ajax({
-                //提交数据的类型 POST GET
-                type:"POST",
-                //提交的网址
-                url:conf_host+"back2/user/lahei",
-                //提交的数据
-                data:{user_id:user_id},
-                //返回数据的格式
-                datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
-                //成功返回之后调用的函数
-                success:function(data){
-                    layer.msg(data);
-                    var result = $("#"+user_id+" td:eq(9)").html('拉黑');
-                },
-                error:function(){
-                    layer.msg('访问服务器失败');
-                }
-            });
-        });
-        //取消拉黑
-        $(document).on("click",".quxiaolahei",function(){
-            var user_id = $(this).parent().parent().parent().attr('id');
-//            layer.msg(user_id);
-            $.ajax({
-                //提交数据的类型 POST GET
-                type:"POST",
-                //提交的网址
-                url:conf_host+"back2/user/quxiaolahei",
-                //提交的数据
-                data:{user_id:user_id},
-                //返回数据的格式
-                datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
-                //成功返回之后调用的函数
-                success:function(data){
-                    layer.msg(data);
-                    var result = $("#"+user_id+" td:eq(9)").html('正常');
-                },
-                error:function(){
-                    layer.msg('访问服务器失败');
                 }
             });
         });

@@ -6,10 +6,12 @@
     <link rel="stylesheet" href="layui/css/layui.css"  media="all">
     <link rel="stylesheet" href="layui/css/myglobal.css"  media="all">
 
+
 </head>
 <body>
-<div class="layui-form-pane" style="margin-top: 15px;display:none;">
-    <div class="layui-form-item" style="float: left;">
+
+<div class="layui-form-pane" style="margin-top: 15px;">
+    <div class="layui-form-item" style="float: left;display:none;">
         <label class="layui-form-label">注册时间&nbsp;&nbsp;:&nbsp;&nbsp;</label>
         <div class="layui-input-inline">
             <input class="layui-input" placeholder="开始日" id="LAY_demorange_s">
@@ -18,15 +20,18 @@
             <input class="layui-input" placeholder="截止日" id="LAY_demorange_e">
         </div>
     </div>
-    <div style="float:left">
+    <div style="float:left" class="layui-form-item" >
         <label class="layui-form-label">关键字</label>
         <div class="layui-input-block">
-            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="暂支持:用户id/昵称/真实姓名" class="layui-input search-key" id="search_key">
+            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="通告标题" class="layui-input search-key" id="search_key">
 
         </div>
     </div>
     <div style="float:left;margin-left:55px;">
         <button class="layui-btn" id="search-button">搜索</button>
+    </div>
+    <div style="float:left;margin-left:11px;">
+        <button class="layui-btn" id="refresh">刷新</button>
     </div>
 </div>
 <div class="layui-form">
@@ -40,16 +45,14 @@
         <!--</colgroup>-->
         <thead>
         <tr style="background:#393D49;color:#fff;">
-            <th>用户ID</th>
-            <th>用户头像</th>
-            <th>用户姓名</th>
-            <th>用户昵称</th>
-            <!--<th>手机</th>-->
-            <th>报名数量</th>
-            <th>未受理数量</th>
-            <th>受邀数量</th>
-            <th>赴约数量</th>
-            <th>负约数量</th>
+            <th>通告id</th>
+            <th>发布者名称</th>
+            <th>通告名称</th>
+            <th>发布时间</th>
+            <th>截止时间</th>
+            <th>报名人数</th>
+            <th>邀面人数</th>
+            <th>赴约人数</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -60,17 +63,15 @@
         <script id="demo" type="text/html">
             {{#  layui.each(d.list, function(index, item){ }}
             <tr>
-                <td>{{ item.user_id }}</td>
-                <td><img src="{{ item.user_img }}" alt="" class="small-user-jpg"></td>
-                <td>{{ item.realname }}</td>
+                <td>{{ item.schedule_id }}</td>
                 <td>{{ item.nickname }}</td>
-                <!--<td>{{ item.mobile }}</td>-->
-                <td>{{ item.enroll_num }}</td>
-                <td>{{ item.neglect }}</td>
-                <td>{{ item.invite_num }}</td>
+                <td>{{ item.schedule_title }}</td>
+                <td>{{ item.createtime }}</td>
+                <td>{{ item.acttime }}</td>
+                <td>{{ item.enroll_num }} <b><a href="scheduleEnrolllistYiren.html?schedule_id={{ item.schedule_id }}" style="color:#009688;">查看报名人名单</a></b></td>
+                <td>{{ item.invite_num }} <b><a href="scheduleInterviewList.html?schedule_id={{ item.schedule_id }}" style="color:#009688;">查看面试名单</a></b></td>
                 <td>{{ item.attend_num }}</td>
-                <td>{{ item.break_num }}</td>
-                <td><b><a href="userEnrollList.html?user_id={{ item.user_id }}" style="color:#009688;">查看该用户报名的所有通告</a></b></td>
+                <td><b><a href="javascript:;" style="color:#009688;">查看负约人名单</a></b></td>
             </tr>
             {{#  }); }}
         </script>
@@ -92,8 +93,7 @@
                 ,layer = layui.layer
                 ,$ = layui.jquery
                 ,laytpl = layui.laytpl;
-        var url = window.location.href;
-        var schedule_id = url.substr(url.indexOf('schedule_id=')+12);
+
         var start = {
             min: '1970-01-01'
             ,max: '2099-06-16 23:59:59'
@@ -129,9 +129,9 @@
             //提交数据的类型 POST GET
             type:"POST",
             //提交的网址
-            url:conf_host+"back2/schedule/enrollList",
+            url:conf_host+"back2/schedule/statistics",
             //提交的数据
-            data:{page:1,rows:12,schedule_id:schedule_id},
+            data:{page:1,rows:12},
             //返回数据的格式
             datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
             //成功返回之后调用的函数
@@ -159,9 +159,9 @@
                                 //提交数据的类型 POST GET
                                 type:"POST",
                                 //提交的网址
-                                url:conf_host+"back2/schedule/enrollList",
+                                url:conf_host+"back2/schedule/statistics",
                                 //提交的数据
-                                data:{page:obj.curr,rows:12,schedule_id:schedule_id,start_time:start_time,end_time:end_time,search_key:search_key},
+                                data:{page:obj.curr,rows:12,start_time:start_time,end_time:end_time,search_key:search_key},
                                 //返回数据的格式
                                 datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
                                 //成功返回之后调用的函数
@@ -195,9 +195,9 @@
                 //提交数据的类型 POST GET
                 type:"POST",
                 //提交的网址
-                url:conf_host+"back2/schedule/enrollList",
+                url:conf_host+"back2/schedule/statistics",
                 //提交的数据
-                data:{page:1,rows:12,schedule_id:schedule_id,start_time:start_time,end_time:end_time,search_key:search_key},
+                data:{page:1,rows:12,start_time:start_time,end_time:end_time,search_key:search_key},
                 //返回数据的格式
                 datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
                 //成功返回之后调用的函数
@@ -223,9 +223,9 @@
                                     //提交数据的类型 POST GET
                                     type:"POST",
                                     //提交的网址
-                                    url:conf_host+"back2/schedule/enrollList",
+                                    url:conf_host+"back2/schedule/statistics",
                                     //提交的数据
-                                    data:{page:obj.curr,rows:12,schedule_id:schedule_id,start_time:start_time,end_time:end_time,search_key:search_key},
+                                    data:{page:obj.curr,rows:12,start_time:start_time,end_time:end_time,search_key:search_key},
                                     //返回数据的格式
                                     datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
                                     //成功返回之后调用的函数
@@ -250,6 +250,82 @@
                 }
             });
 
+        });
+
+        //        刷新，并生成分页
+        $('#refresh').on('click',function(){
+            $('#LAY_demorange_s').val('');
+            $('#LAY_demorange_e').val('');
+            $('#search_key').val('');
+            $.ajax({
+                //提交数据的类型 POST GET
+                type:"POST",
+                //提交的网址
+                url:conf_host+"back2/schedule/statistics",
+                //提交的数据
+                data:{page:1,rows:12},
+                //返回数据的格式
+                datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
+                //成功返回之后调用的函数
+                success:function(data){
+                    layer.msg('第 '+ 1 +' 页');
+                    var getTpl = demo_model;
+                    var data_object = $.parseJSON( data );
+                    laytpl(getTpl).render(data_object, function(html){
+                        view.innerHTML = html;
+                    });
+//                    重新生成分页
+                    laypage({
+                        cont: 'demo7'
+                        ,pages:data_object.count
+                        ,groups: 5
+                        ,skip: true
+                        ,jump: function(obj, first){
+                            if(!first){
+                                var start_time = $('#LAY_demorange_s').val();
+                                var end_time = $('#LAY_demorange_e').val();
+                                var search_key = $('#search_key').val();
+                                $.ajax({
+                                    //提交数据的类型 POST GET
+                                    type:"POST",
+                                    //提交的网址
+                                    url:conf_host+"back2/schedule/statistics",
+                                    //提交的数据
+                                    data:{page:obj.curr,rows:12,start_time:start_time,end_time:end_time,search_key:search_key},
+                                    //返回数据的格式
+                                    datatype:"json",//"xml", "html", "script", "json", "jsonp", "text".
+                                    //成功返回之后调用的函数
+                                    success:function(data){
+                                        layer.msg('第 '+ obj.curr +' 页');
+                                        var getTpl = demo_model;
+                                        var data_object = $.parseJSON( data );
+                                        laytpl(getTpl).render(data_object, function(html){
+                                            view.innerHTML = html;
+                                        });
+                                    },
+                                    error:function(){
+                                        alert('访问服务器失败');
+                                    }
+                                });
+                            }
+                        }
+                    });
+                },
+                error:function(){
+                    alert('访问服务器失败');
+                }
+            });
+
+        });
+
+        $(function(){
+            document.onkeydown = function(e){
+                var ev = document.all ? window.event : e;
+                if(ev.keyCode==13) {
+                    $('#search-button').click();
+
+                }
+            }
         });
 
     });

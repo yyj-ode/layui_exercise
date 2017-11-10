@@ -88,6 +88,18 @@
                         <td>{{ d.enroll_num }}</td>
                     </tr>
                     <tr>
+                        <td><span class="red">待审核通告数量</span></td>
+                        <td><span class="red">{{ d.schedule_waiting }}</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="red">个人boss数量</span></td>
+                        <td><span class="red">{{ d.boss_personal }}</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="red">机构boss数量</span></td>
+                        <td><span class="red">{{ d.boss_organization }}</span></td>
+                    </tr>
+                    <tr>
                         <td>正在直播数量</td>
                         <td>{{ d.video_num }}</td>
                     </tr>
@@ -98,10 +110,6 @@
                     <tr>
                         <td><span class="red">待演绎审核数量</span></td>
                         <td><span class="red">{{ d.yanyi_wating_num }}</span></td>
-                    </tr>
-                    <tr>
-                        <td>充值总金额</td>
-                        <td>{{ d.recharge_totalprice }}</td>
                     </tr>
                     <tr>
                         <td>提现总金额</td>
